@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# thanks for https://gist.github.com/hrules6872/8077d6799ba53499be361b931059eda2#file-pre-commit
+
+MASTER='refs/heads/master'
+
+if git symbolic-ref HEAD | grep ${MASTER} >/dev/null; then
+  exec </dev/tty
+  while true; do
+    # shellcheck disable=SC2039
+    read -r -p "You're about to commit to master, want some bacon? [y|n]" ANSWER
+    case ${ANSWER} in
+    [Yy]*) exit 0 ;; # tells git to continue normally
+    [Nn]*) exit 1 ;; # tells git to abort operation
+    esac
+  done
+fi
+
+exit 0 # everything is ok
