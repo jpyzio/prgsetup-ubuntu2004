@@ -16,7 +16,7 @@ sudo mv composer.phar /usr/local/bin/composer
 ### BEGIN Composer global tools
 echo "export PATH=\"\$HOME/.composer/vendor/bin:\$PATH\"" | tee --append ~/.zshrc ~/.bashrc
 
-composer global require phpunit/phpunit phing/phing sebastian/phpcpd phploc/phploc phpmd/phpmd squizlabs/php_codesniffer
+composer global require phpunit/phpunit phing/phing sebastian/phpcpd phploc/phploc phpmd/phpmd squizlabs/php_codesniffer phpstan/phpstan
 ### END Composer global tools
 
 ### BEGIN Framework installers
