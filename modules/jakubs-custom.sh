@@ -43,3 +43,15 @@ fi
 
 sudo systemctl disable ondemand
 ### END Enable performance mode
+
+### BEGIN User groups
+for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo ; do
+  groups | grep "${GROUP}" --quiet
+  if [[ "${?}" == "1" ]]; then # The user does not belong to the group
+    cut -d: -f1 /etc/group | tr '\n' ' ' | grep "${GROUP}" --quiet
+    if [[ "${?}" == "0" ]]; then # The group exists
+      sudo usermod --append --groups "${GROUP}" "${USER}"
+    fi
+  fi
+done
+### END User groups
