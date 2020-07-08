@@ -3,5 +3,8 @@
 ### BEGIN VirtualBox
 sudo apt install --yes virtualbox virtualbox-ext-pack
 
-sudo adduser $USER vboxusers
+groups | grep vboxusers --quiet
+if [[ ${?} == "1" ]]; then
+  sudo adduser $USER vboxusers
+fi
 ### END VirtualBox

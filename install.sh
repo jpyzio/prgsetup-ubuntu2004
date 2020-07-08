@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -o errexit
 set -o pipefail
 set -o xtrace
 
@@ -25,32 +24,34 @@ sudo echo -e "\e[32mLet's start the installation ;)\e[39m"
 
 CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
   30 77 22 \
-  "update-system" "Update system" on \
-  "system-tools" "System tools" on \
-  "git" "with custom hooks and configs" on \
-  "ssh-keygen" "Generate SSH Key" on \
-  "diagnostic-tools" "Diagnostic tools" on \
-  "database-clients" "Native database clients" on \
-  "dev-tools-common" "Tools for all developers" on \
-  "dev-tools-php" "Tools for PHP developers" on \
-  "dev-tools-frontend" "Tools for frontend developers" on \
-  "terminal" "Eg. Z Shell and other modifications" on \
-  "browsers" "Eg. Chrome, Firefox" on \
-  "ide-editors" "Sublime Text 3, Jetbrains Toolbox" on \
-  "communication" "Eg. Slack" on \
-  "office" "Eg. LibreOffice, GIMP" on \
-  "graphics" "Graphics programs" on \
-  "disk" "Disk tools" on \
-  "security" "Eg. Firewall" on \
-  "media" "Eg. Spotify, VLC" on \
-  "ssh-server" "With secure configuration" on \
-  "documentation" "Generators, converters etc" on \
-  "jakubs-custom" "Jakub's customization" on \
-  "virtualbox" "If you want to install other systems ;)" on \
-  "android-tuning" "Tuning for Android's virtual machine" on \
+  "system-tools" "System tools" off \
+  "git" "with custom hooks and configs" off \
+  "ssh-keygen" "Generate SSH Key" off \
+  "diagnostic-tools" "Diagnostic tools" off \
+  "database-clients" "Native database clients" off \
+  "dev-tools-common" "Tools for all developers" off \
+  "dev-tools-php" "Tools for PHP developers" off \
+  "dev-tools-frontend" "Tools for frontend developers" off \
+  "terminal" "Eg. Z Shell and other modifications" off \
+  "browsers" "Eg. Chrome, Firefox" off \
+  "ide-editors" "Sublime Text 3, Jetbrains Toolbox" off \
+  "communication" "Eg. Slack" off \
+  "office" "Eg. LibreOffice, GIMP" off \
+  "graphics" "Graphics programs" off \
+  "disk" "Disk tools" off \
+  "security" "Eg. Firewall" off \
+  "media" "Eg. Spotify, VLC" off \
+  "ssh-server" "With secure configuration" off \
+  "jakubs-custom" "Jakub's customization" off \
+  "virtualbox" "If you want to install other systems ;)" off \
+  "android-tuning" "Tuning for Android's virtual machine" off \
   3>&2 2>&1 1>&3)
 
 #  "docker" "With docker-compose" off \ ### TODO: when it will be available
+
+if [[ "${CHOICES}" == "" ]]; then
+  exit 0
+fi
 
 # shellcheck disable=SC1090
 source "${MODULES_DIR}"/required.sh
@@ -61,6 +62,6 @@ for CHOICE in ${CHOICES}; do
   source "${MODULES_DIR}/${CHOICE}.sh"
 done
 
-#if zenity --question --text="Do you want to reboot your system?"; then
-#  reboot
-#fi
+if zenity --question --text="Do you want to reboot your system?"; then
+  reboot
+fi

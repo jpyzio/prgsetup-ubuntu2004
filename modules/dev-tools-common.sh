@@ -9,7 +9,7 @@ sudo apt install --yes p7zip-full
 ### END Compression apps
 
 ### BEGIN Diff tools
-sudo apt install --yes meld
+sudo apt install --yes meld diffutils
 ### END BEGIN Diff tools
 
 ### BEGIN REST clients

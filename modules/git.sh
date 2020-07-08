@@ -9,17 +9,29 @@ while [[ -z ${REAL_NAME} ]]; do
   REAL_NAME=$(text_input "Git Global - Your real full name:")
 done
 
+git config --global user.name "${REAL_NAME}"
+
 while [[ -z ${EMAIL} ]]; do
   EMAIL=$(text_input "Git Global - Your Email:")
 done
 
-git config --global user.name "${REAL_NAME}"
 git config --global user.email "${EMAIL}"
 
-git config --global push.default current
+PUSH_DEFAULT=$(text_input "Git Global - Push default: [current]")
+if [[ -z ${PUSH_DEFAULT} ]]; then
+  PUSH_DEFAULT='current'
+fi
+git config --global push.default "${PUSH_DEFAULT}"
 
-echo -e "npm-debug.log\n.DS_Store\nThumbs.db\n.idea/\n*~\n*.log\n/vendor/\n*.tmp" | tee --append ~/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
+git config --global core.excludesfile "${ROOT_DIR}/.gitignore_global"
+
+
+grep 'export PS1' ~/.bashrc >> /dev/null
+if [[ "${?}" == "1" ]]; then
+  echo "export PS1='\[\033[01;32m\]\h\[\033[01;34m\] \w\[\033[31m\]\$(__git_ps1 \" (%s)\") \[\033[01;34m\]$\[\033[00m\] '" \
+  | tee --append ~/.bashrc
+fi
+
 ### END Git configuration
 
 ### BEGIN Git hooks

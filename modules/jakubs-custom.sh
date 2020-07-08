@@ -20,9 +20,14 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 
 ### END Dock
 
-### BEGIN Aliases
-echo "alias wanip='curl -s http://whatismyip.akamai.com/'" >>~/.bashrc >>~/.zshrc
-### END Aliases
+### BEGIN Custom aliases and functions
+for FILE in ~/.bashrc ~/.zshrc; do
+  grep -E "source.*custom-functions.sh" "${FILE}" --quiet
+  if [[ "${?}" == "1" ]]; then
+    echo "source \"${ROOT_DIR}/custom-functions.sh\"" | tee --append "${FILE}"
+  fi
+done
+### END Custom aliases and functions
 
 ### BEGIN Packages
 sudo apt install --yes shellcheck speedtest-cli
@@ -30,6 +35,11 @@ sudo apt install --yes shellcheck speedtest-cli
 
 ### BEGIN Enable performance mode
 sudo apt install --yes cpufrequtils
-echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
+
+grep 'GOVERNOR="performance"' /etc/default/cpufrequtils --quiet
+if [[ "${?}" == "1" ]]; then
+  echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
+fi
+
 sudo systemctl disable ondemand
 ### END Enable performance mode
