@@ -17,8 +17,14 @@ password_input() {
   zenity --password --title="Ubuntu Configurator" --text="${1}"
 }
 
-# shellcheck disable=SC1090
-source "${MODULES_DIR}"/check.sh
+### BEGIN System checker
+UBUNTU_VERSION=$(lsb_release --release --short)
+
+if [[ "${UBUNTU_VERSION}" != "${CONFIGURATOR_VERSION}" ]]; then
+  echo -e "\e[31mERROR: This configurator is only for Ubuntu ${CONFIGURATOR_VERSION}\e[39m"
+  exit 1
+fi
+### END System checker
 
 sudo echo -e "\e[32mLet's start the installation ;)\e[39m"
 
@@ -53,8 +59,16 @@ if [[ "${CHOICES}" == "" ]]; then
   exit 0
 fi
 
-# shellcheck disable=SC1090
-source "${MODULES_DIR}"/required.sh
+### BEGIN Required
+sudo apt update
+sudo apt full-upgrade --yes
+
+sudo apt install --yes gdebi curl wget jq zenity rng-tools xclip gawk \
+  software-properties-common apt-transport-https ca-certificates gnupg-agent
+
+sudo apt autoremove --yes
+sudo apt autoclean --yes
+### END Required
 
 for CHOICE in ${CHOICES}; do
   CHOICE=$(echo "${CHOICE}" | tr --delete '"')
