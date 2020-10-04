@@ -30,6 +30,7 @@ sudo echo -e "\e[32mLet's start the installation ;)\e[39m"
 
 CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
     30 77 22 \
+    "0_system-update" "system update" on \
     "1_kvm-for-android-studio.sh" "kvm for android studio" off \
     "2_slack.sh" "slack" off \
     "3_thunderbird.sh" "thunderbird" off \
@@ -90,29 +91,28 @@ CHOICES=$(whiptail --checklist "Select which services do you want to install. " 
     "58_virtualbox.sh" "virtualbox" off \
     "59_chrome.sh" "chrome" off \
     "60_firefox.sh" "firefox" off \
-    "61_system-update" "system update" off \
     3>&2 2>&1 1>&3)
 
 if [[ "${CHOICES}" == "" ]]; then
     exit 0
 fi
 
-### BEGIN Required
 sudo apt update
-sudo apt full-upgrade --yes
 
-sudo apt install --yes gdebi curl wget jq zenity rng-tools xclip gawk \
-    software-properties-common apt-transport-https ca-certificates gnupg-agent
-
-sudo apt autoremove --yes
-sudo apt autoclean --yes
-### END Required
+if [[ ! -f "${ROOT_DIR}/.installed" ]] ; then
+    # shellcheck disable=SC1090
+    source "${MODULES_DIR}/0_system-update.sh"
+    touch "${ROOT_DIR}/.installed"
+fi
 
 for CHOICE in ${CHOICES}; do
     CHOICE=$(echo "${CHOICE}" | tr --delete '"')
     # shellcheck disable=SC1090
     source "${MODULES_DIR}/${CHOICE}.sh"
 done
+
+sudo apt autoremove --yes
+sudo apt autoclean --yes
 
 if zenity --question --text="Do you want to reboot your system?"; then
     reboot
