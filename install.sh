@@ -91,6 +91,7 @@ CHOICES=$(whiptail --checklist "Select which services do you want to install. " 
     "58_virtualbox.sh" "virtualbox" off \
     "59_chrome.sh" "chrome" off \
     "60_firefox.sh" "firefox" off \
+    "61_obs-studio.sh" "OBS Studio" off \
     3>&2 2>&1 1>&3)
 
 if [[ "${CHOICES}" == "" ]]; then
