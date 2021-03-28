@@ -114,7 +114,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
 fi
 
 if [[ "${CHOICES}" == "" ]]; then
-    echp "No packages selected"
+    echo "No packages selected"
     exit 1
 fi
 
