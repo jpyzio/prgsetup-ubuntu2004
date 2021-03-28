@@ -112,7 +112,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "obs-studio" "OBS Studio" off \
     3>&2 2>&1 1>&3)
 fi
-echo "${CHOICES}"; exit;
+
 if [[ "${CHOICES}" == "" ]]; then
     echp "No packages selected"
     exit 1
