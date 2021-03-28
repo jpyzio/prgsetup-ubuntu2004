@@ -30,68 +30,68 @@ sudo echo -e "\e[32mLet's start the installation ;)\e[39m"
 
 CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
     30 77 22 \
-    "0_system-update" "system update" on \
-    "1_kvm-for-android-studio" "kvm for android studio" on \
-    "2_slack" "slack" on \
-    "3_thunderbird" "thunderbird" on \
-    "4_mysql" "mysql" on \
-    "5_postgresql" "postgresql" on \
-    "6_fiezilla" "fiezilla" on \
-    "7_rsync" "rsync" on \
-    "8_7zip" "7zip" on \
-    "9_diff-utils" "diff utils" on \
-    "10_insomnia" "insomnia" on \
-    "11_postman" "postman" on \
-    "12_nodejs-12" "nodejs 12" on \
-    "13_yarn" "yarn" on \
-    "14_php7.4-with-extensions" "php7.4 with extensions" on \
-    "15_composer" "composer" on \
-    "16_composer-test-utils" "composer test utils" on \
-    "17_symfony-cli" "symfony cli" on \
-    "18_diagnostic-tools" "diagnostic tools" on \
-    "19_network-tools" "network tools" on \
-    "20_gparted" "gparted" on \
-    "21_smart-tools" "smart tools" on \
-    "22_secure-delete" "secure delete" on \
-    "23_docker" "docker" on \
-    "24_docker-compose" "docker compose" on \
-    "25_git" "git" on \
-    "26_git-hooks" "git hooks" on \
-    "27_git-config" "git config" on \
-    "28_gpg" "gpg" on \
-    "29_gpg-create-key" "gpg create key" on \
-    "30_gimp" "gimp" on \
-    "31_webp" "webp" on \
-    "32_nautilus-extensions" "nautilus extensions" on \
-    "33_sublime-text-3" "sublime text 3" on \
-    "34_jetbrains-toolbox" "jetbrains toolbox" on \
-    "35_jakoob-system-dock" "jakoob system dock" on \
-    "36_jakoob-aliases" "jakoob aliases" on \
-    "37_shellcheck" "shellcheck" on \
-    "38_speedtest" "speedtest" on \
-    "39_cpufreq" "cpufreq" on \
-    "40_cpufreq-set-performance" "cpufreq set performance" on \
-    "41_jakub-user-groups" "jakub user groups" on \
-    "42_vlc" "vlc" on \
-    "43_spotify" "spotify" on \
-    "44_libreonice" "libreonice" on \
-    "45_ufw" "ufw" on \
-    "46_rkhunter" "rkhunter" on \
-    "47_ssh-keygen" "ssh keygen" on \
-    "48_ssh-server" "ssh server" on \
-    "49_sshfs" "sshfs" on \
-    "50_nfs" "nfs" on \
-    "51_ftpfs" "ftpfs" on \
-    "52_openvpn-client" "openvpn client" on \
-    "53_zsh" "zsh" on \
-    "54_tmux" "tmux" on \
-    "55_oh-my-zsh" "oh my zsh" on \
-    "56_zsh-fzf" "zsh fzf" on \
-    "57_jakoob-zsh-tuning" "jakoob zsh tuning" on \
-    "58_virtualbox" "virtualbox" on \
-    "59_chrome" "chrome" on \
-    "60_firefox" "firefox" on \
-    "61_obs-studio" "OBS Studio" on \
+    "system-update" "system update" on \
+    "kvm-for-android-studio" "kvm for android studio" on \
+    "slack" "slack" on \
+    "thunderbird" "thunderbird" on \
+    "mysql" "mysql" on \
+    "postgresql" "postgresql" on \
+    "fiezilla" "fiezilla" on \
+    "rsync" "rsync" on \
+    "7zip" "7zip" on \
+    "diff-utils" "diff utils" on \
+    "insomnia" "insomnia" on \
+    "postman" "postman" on \
+    "nodejs-12" "nodejs 12" on \
+    "yarn" "yarn" on \
+    "php7.4-with-extensions" "php7.4 with extensions" on \
+    "composer" "composer" on \
+    "composer-test-utils" "composer test utils" on \
+    "symfony-cli" "symfony cli" on \
+    "diagnostic-tools" "diagnostic tools" on \
+    "network-tools" "network tools" on \
+    "gparted" "gparted" on \
+    "smart-tools" "smart tools" on \
+    "secure-delete" "secure delete" on \
+    "docker" "docker" on \
+    "docker-compose" "docker compose" on \
+    "git" "git" on \
+    "git-hooks" "git hooks" on \
+    "git-config" "git config" on \
+    "gpg" "gpg" on \
+    "gpg-create-key" "gpg create key" on \
+    "gimp" "gimp" on \
+    "webp" "webp" on \
+    "nautilus-extensions" "nautilus extensions" on \
+    "sublime-text-3" "sublime text 3" on \
+    "jetbrains-toolbox" "jetbrains toolbox" on \
+    "jakoob-system-dock" "jakoob system dock" on \
+    "jakoob-aliases" "jakoob aliases" on \
+    "shellcheck" "shellcheck" on \
+    "speedtest" "speedtest" on \
+    "cpufreq" "cpufreq" on \
+    "cpufreq-set-performance" "cpufreq set performance" on \
+    "jakub-user-groups" "jakub user groups" on \
+    "vlc" "vlc" on \
+    "spotify" "spotify" on \
+    "libreonice" "libreonice" on \
+    "ufw" "ufw" on \
+    "rkhunter" "rkhunter" on \
+    "ssh-keygen" "ssh keygen" on \
+    "ssh-server" "ssh server" on \
+    "sshfs" "sshfs" on \
+    "nfs" "nfs" on \
+    "ftpfs" "ftpfs" on \
+    "openvpn-client" "openvpn client" on \
+    "zsh" "zsh" on \
+    "tmux" "tmux" on \
+    "oh-my-zsh" "oh my zsh" on \
+    "zsh-fzf" "zsh fzf" on \
+    "jakoob-zsh-tuning" "jakoob zsh tuning" on \
+    "virtualbox" "virtualbox" on \
+    "chrome" "chrome" on \
+    "firefox" "firefox" on \
+    "obs-studio" "OBS Studio" on \
     3>&2 2>&1 1>&3)
 
 if [[ "${CHOICES}" == "" ]]; then
