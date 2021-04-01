@@ -24,7 +24,7 @@ if (( "${SEC_SINCE_UPDATE}" < "${UPDATE_DAYS}" )); then
 	exit
 fi
 
-read -p "Do you want to update system and other tools? [y/N]" -n 1 -r
+read -p "Do you want to update your system and other tools? [y/N]" -n 1 -r
 echo
 if [[ $REPLY =~ ^[YyTt]$ ]]; then
     source "${MODULES_DIR}/system-update.sh"
