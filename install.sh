@@ -135,6 +135,8 @@ done
 sudo apt autoremove --yes
 sudo apt autoclean --yes
 
+"${ROOT_DIR}/update.sh"
+
 if zenity --question --text="Do you want to reboot your system?"; then
     reboot
 fi
