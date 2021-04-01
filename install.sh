@@ -123,7 +123,7 @@ sudo apt update
 if [[ ! -f "${ROOT_DIR}/.installed" ]] ; then
     # shellcheck disable=SC1090
     source "${MODULES_DIR}/system-update.sh"
-    touch "${ROOT_DIR}/.installed"
+    echo $(date '+%Y-%m-%d %H:%M:%S') > "${ROOT_DIR}/.installed"
 fi
 
 for CHOICE in ${CHOICES}; do
