@@ -49,67 +49,67 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
         30 77 22 \
         "system-update" "system update" off \
-        "kvm-for-android-studio" "kvm for android studio" off \
-        "slack" "slack" off \
-        "thunderbird" "thunderbird" off \
-        "mysql" "mysql" off \
-        "postgresql" "postgresql" off \
-        "fiezilla" "fiezilla" off \
-        "rsync" "rsync" off \
         "7zip" "7zip" off \
-        "diff-utils" "diff utils" off \
-        "insomnia" "insomnia" off \
-        "postman" "postman" off \
-        "nodejs-12" "nodejs 12" off \
-        "yarn" "yarn" off \
-        "php7.4-with-extensions" "php7.4 with extensions" off \
-        "composer" "composer" off \
+        "chrome" "chrome" off \
         "composer-test-utils" "composer test utils" off \
-        "symfony-cli" "symfony cli" off \
-        "diagnostic-tools" "diagnostic tools" off \
-        "network-tools" "network tools" off \
-        "gparted" "gparted" off \
-        "smart-tools" "smart tools" off \
-        "secure-delete" "secure delete" off \
-        "docker" "docker" off \
-        "docker-compose" "docker compose" off \
-        "git" "git" off \
-        "git-hooks" "git hooks" off \
-        "git-config" "git config" off \
-        "gpg" "gpg" off \
-        "gpg-create-key" "gpg create key" off \
-        "gimp" "gimp" off \
-        "webp" "webp" off \
-        "nautilus-extensions" "nautilus extensions" off \
-        "sublime-text-3" "sublime text 3" off \
-        "jetbrains-toolbox" "jetbrains toolbox" off \
-        "jakoob-system-dock" "jakoob system dock" off \
-        "jakoob-aliases" "jakoob aliases" off \
-        "shellcheck" "shellcheck" off \
-        "speedtest" "speedtest" off \
-        "cpufreq" "cpufreq" off \
+        "composer" "composer" off \
         "cpufreq-set-performance" "cpufreq set performance" off \
+        "cpufreq" "cpufreq" off \
+        "diagnostic-tools" "diagnostic tools" off \
+        "diff-utils" "diff utils" off \
+        "docker-compose" "docker compose" off \
+        "docker" "docker" off \
+        "fiezilla" "fiezilla" off \
+        "firefox" "firefox" off \
+        "ftpfs" "ftpfs" off \
+        "gimp" "gimp" off \
+        "git-config" "git config" off \
+        "git-hooks" "git hooks" off \
+        "git" "git" off \
+        "gparted" "gparted" off \
+        "gpg-create-key" "gpg create key" off \
+        "gpg" "gpg" off \
+        "insomnia" "insomnia" off \
+        "jakoob-aliases" "jakoob aliases" off \
+        "jakoob-system-dock" "jakoob system dock" off \
+        "jakoob-zsh-tuning" "jakoob zsh tuning" off \
         "jakub-user-groups" "jakub user groups" off \
-        "vlc" "vlc" off \
-        "spotify" "spotify" off \
+        "jetbrains-toolbox" "jetbrains toolbox" off \
+        "kvm-for-android-studio" "kvm for android studio" off \
         "libreonice" "libreonice" off \
-        "ufw" "ufw" off \
+        "mysql" "mysql" off \
+        "nautilus-extensions" "nautilus extensions" off \
+        "network-tools" "network tools" off \
+        "nfs" "nfs" off \
+        "nodejs-12" "nodejs 12" off \
+        "obs-studio" "OBS Studio" off \
+        "oh-my-zsh" "oh my zsh" off \
+        "openvpn-client" "openvpn client" off \
+        "php7.4-with-extensions" "php7.4 with extensions" off \
+        "postgresql" "postgresql" off \
+        "postman" "postman" off \
         "rkhunter" "rkhunter" off \
+        "rsync" "rsync" off \
+        "secure-delete" "secure delete" off \
+        "shellcheck" "shellcheck" off \
+        "slack" "slack" off \
+        "smart-tools" "smart tools" off \
+        "speedtest" "speedtest" off \
+        "spotify" "spotify" off \
         "ssh-keygen" "ssh keygen" off \
         "ssh-server" "ssh server" off \
         "sshfs" "sshfs" off \
-        "nfs" "nfs" off \
-        "ftpfs" "ftpfs" off \
-        "openvpn-client" "openvpn client" off \
-        "zsh" "zsh" off \
+        "sublime-text-3" "sublime text 3" off \
+        "symfony-cli" "symfony cli" off \
+        "thunderbird" "thunderbird" off \
         "tmux" "tmux" off \
-        "oh-my-zsh" "oh my zsh" off \
-        "zsh-fzf" "zsh fzf" off \
-        "jakoob-zsh-tuning" "jakoob zsh tuning" off \
+        "ufw" "ufw" off \
         "virtualbox" "virtualbox" off \
-        "chrome" "chrome" off \
-        "firefox" "firefox" off \
-        "obs-studio" "OBS Studio" off \
+        "vlc" "vlc" off \
+        "webp" "webp" off \
+        "yarn" "yarn" off \
+        "zsh-fzf" "zsh fzf" off \
+        "zsh" "zsh" off \
     3>&2 2>&1 1>&3)
 fi
 
