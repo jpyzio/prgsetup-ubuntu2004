@@ -10,4 +10,5 @@ composer global require \
     phploc/phploc \
     phpmd/phpmd \
     squizlabs/php_codesniffer \
-    phpstan/phpstan
+    phpstan/phpstan \
+    phpunit/phpunit
