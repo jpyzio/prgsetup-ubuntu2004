@@ -1,7 +1,7 @@
 # WORK IN PROGRESS
 
 # WIP!!! Ubuntu 20.04 LTS for programmers WIP!!!
-Ubuntu script provides a ready environment for programmers.
+Ubuntu script provides a ready environment for programmers, but not only.
 
 ### Prerequisites
 ```bash
@@ -27,8 +27,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 See also the list of [contributors](https://github.com/jpyzio/ubuntu-configurator/contributors) who participated in this project.
 
 ## Thanks for
-* https://github.com/hrules6872 for git-hooks
-* https://github.com/tommarshall for git-good-commit
+* Google
+* Stack Overflow community :)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/jpyzio/ubuntu-configurator/blob/master/LICENSE.md) file for details
