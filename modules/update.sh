@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-sudo apt full-upgrade --yes
+set -o pipefail
+
 
 sudo apt install --yes gdebi \
     curl \
@@ -15,12 +16,19 @@ sudo apt install --yes gdebi \
     ca-certificates \
     gnupg-agent
 
+cd "${ROOT_DIR}"
+git pull
+cd -
+
+sudo apt full-upgrade --yes
+
 sudo snap refresh
 
 which composer > /dev/null
 if [[ "${?}" == "0" ]]; then
-    curl --silent --show-error https://getcomposer.org/installer | php
-    sudo mv composer.phar /usr/local/bin/composer
-
+    "${MODULES_DIR}/composer.sh"
     composer global update
 fi
+
+sudo apt autoremove --yes
+sudo apt autoclean --yes
