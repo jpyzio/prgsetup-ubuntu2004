@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+which gpg > /dev/null
+if [[ "${?}" == "1" ]]; then
+	source "${MODULES_DIR}/gpg.sh"
+fi
+
 KEYGEN_CONFIG_FILE="${ROOT_DIR}/keygen_config"
 
 while [[ -z ${REAL_NAME} ]]; do
