@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+which git > /dev/null
+if [[ "${?}" == "1" ]]; then
+	source "${MODULES_DIR}/git.sh"
+fi
+
 while [[ -z ${REAL_NAME} ]]; do
   REAL_NAME=$(text_input "Git Global - Your real full name:")
 done
