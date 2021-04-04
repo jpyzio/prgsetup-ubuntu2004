@@ -42,7 +42,7 @@ if [[ "${INSTALATION_PROFILE}" == "full" ]]; then
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
-    CHOICES="system-update autoupdate zsh chrome thunderbird git sublime-text-3 ufw"
+    CHOICES="autoupdate zsh chrome thunderbird git sublime-text-3 ufw"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
@@ -101,7 +101,6 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "sshfs" "sshfs" off \
         "sublime-text-3" "sublime text 3" off \
         "symfony-cli" "symfony cli" off \
-        "system-update" "system update" off \
         "thunderbird" "thunderbird" off \
         "tmux" "tmux" off \
         "ufw" "ufw" off \
@@ -124,7 +123,7 @@ sudo apt update
 
 if [[ ! -f "${ROOT_DIR}/.installed" ]] ; then
     # shellcheck disable=SC1090
-    source "${MODULES_DIR}/system-update.sh"
+    source "${MODULES_DIR}/update.sh"
     echo $(date '+%Y-%m-%d %H:%M:%S') > "${ROOT_DIR}/.installed"
 fi
 
