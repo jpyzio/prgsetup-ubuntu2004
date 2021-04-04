@@ -4,5 +4,5 @@ sudo apt install --yes qemu-kvm
 
 groups | grep kvm --quiet
 if [[ ${?} == "1" ]]; then
-  sudo adduser "${USER}" kvm
+    sudo adduser "${USER}" kvm
 fi

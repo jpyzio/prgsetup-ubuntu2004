@@ -8,15 +8,15 @@ fi
 KEYGEN_CONFIG_FILE="${ROOT_DIR}/keygen_config"
 
 while [[ -z ${REAL_NAME} ]]; do
-  REAL_NAME=$(input "Your Real Name")
+    REAL_NAME=$(input "Your Real Name")
 done
 
 while [[ -z ${EMAIL} ]]; do
-  EMAIL=$(input "Your Email")
+    EMAIL=$(input "Your Email")
 done
 
 while [[ -z ${GPG_PASSPHRASE} ]]; do
-  GPG_PASSPHRASE=$(password_input "Your Passphrase for GPG Key")
+    GPG_PASSPHRASE=$(password_input "Your Passphrase for GPG Key")
 done
 
 echo "Key-Type: 1
@@ -35,12 +35,12 @@ shred --remove --iterations=100 "${KEYGEN_CONFIG_FILE}"
 
 GPG_ID=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^sec:' | cut --delimiter ':' --fields 5)
 if [[ ! -z "${GPG_ID}" ]]; then
-  sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" ~/.bashrc ~/.zshrc
+    sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" ~/.bashrc ~/.zshrc
 
-  echo "export GPGKEY=${GPG_ID}" >>~/.bashrc >>~/.zshrc
+    echo "export GPGKEY=${GPG_ID}" >>~/.bashrc >>~/.zshrc
 
-  if [[ $(command -v git) ]]; then
-    git config --global user.signingkey "${GPG_ID}"
-    git config --global commit.gpgsign true
-  fi
+    if [[ $(command -v git) ]]; then # TODO: vs `which git > /dev/null`
+        git config --global user.signingkey "${GPG_ID}"
+        git config --global commit.gpgsign true
+    fi
 fi
