@@ -85,7 +85,8 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "obs-studio" "OBS Studio" off \
         "oh-my-zsh" "oh my zsh" off \
         "openvpn-client" "openvpn client" off \
-        "php7.4-with-extensions" "php7.4 with extensions" off \
+        "php7.4-with-extensions" "PHP 7.4 with extensions" off \
+        "php8.0-with-extensions" "PHP 8.0 with extensions" off \
         "postgresql" "postgresql" off \
         "postman" "postman" off \
         "rkhunter" "rkhunter" off \
