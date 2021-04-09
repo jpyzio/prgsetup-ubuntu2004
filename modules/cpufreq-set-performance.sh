@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-grep 'GOVERNOR="performance"' /etc/default/cpufrequtils --quiet
-if [[ "${?}" == "1" ]]; then
+if ! grep --quiet 'GOVERNOR="performance"' /etc/default/cpufrequtils; then
     echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
 fi
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-which composer > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which composer > /dev/null; then
 	source "${MODULES_DIR}/composer.sh"
 fi
 

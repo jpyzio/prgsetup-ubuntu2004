@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 for FILE in ~/.bashrc ~/.zshrc; do
-    if ! grep -E "source.*aliases.sh" "${FILE}" --quiet; then
+    if ! grep --quiet -E "source.*aliases.sh" "${FILE}"; then
         echo "source \"${ROOT_DIR}/aliases.sh\"" | tee --append "${FILE}"
     fi
 done
