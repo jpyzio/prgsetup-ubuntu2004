@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-which git > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which git > /dev/null; then
 	source "${MODULES_DIR}/git.sh"
 fi
 
@@ -23,5 +22,6 @@ if [[ -z ${PUSH_DEFAULT} ]]; then
 fi
 git config --global push.default "${PUSH_DEFAULT}"
 
-
-git config --global core.excludesfile "${ROOT_DIR}/.gitignore_global"
+if ! grep --quiet 'excludesfile' ~/.gitconfig ; then
+    git config --global core.excludesfile "${ROOT_DIR}/.gitignore_global"
+fi

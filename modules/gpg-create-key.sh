@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-which gpg > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which gpg > /dev/null; then
 	source "${MODULES_DIR}/gpg.sh"
 fi
 
@@ -34,12 +33,12 @@ gpg --gen-key --batch "${KEYGEN_CONFIG_FILE}"
 shred --remove --iterations=100 "${KEYGEN_CONFIG_FILE}"
 
 GPG_ID=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^sec:' | cut --delimiter ':' --fields 5)
-if [[ ! -z "${GPG_ID}" ]]; then
+if [[ -n "${GPG_ID}" ]]; then
     sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" ~/.bashrc ~/.zshrc
 
-    echo "export GPGKEY=${GPG_ID}" >>~/.bashrc >>~/.zshrc
+    echo "export GPGKEY=${GPG_ID}" | tee --append ~/.bashrc | tee --append ~/.zshrc
 
-    if [[ $(command -v git) ]]; then # TODO: vs `which git > /dev/null`
+    if which git > /dev/null; then
         git config --global user.signingkey "${GPG_ID}"
         git config --global commit.gpgsign true
     fi

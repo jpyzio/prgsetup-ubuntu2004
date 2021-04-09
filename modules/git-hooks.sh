@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-which git > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which git > /dev/null; then
 	source "${MODULES_DIR}/git.sh"
 fi
 

@@ -2,7 +2,6 @@
 
 sudo apt install --yes qemu-kvm
 
-groups | grep kvm --quiet
-if [[ ${?} == "1" ]]; then
+if groups | grep --quiet kvm; then
     sudo adduser "${USER}" kvm
 fi

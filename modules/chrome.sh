@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-which google-chrome > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which google-chrome > /dev/null; then
     CHROME_FILE="${ROOT_DIR}/google-chrome.deb"
     CHROME_DEB_URL="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
