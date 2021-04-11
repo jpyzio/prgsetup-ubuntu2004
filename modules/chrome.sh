@@ -8,3 +8,5 @@ if ! which google-chrome > /dev/null; then
     sudo gdebi --non-interactive "${CHROME_FILE}"
     rm "${CHROME_FILE}"
 fi
+
+sudo apt install --yes chrome-gnome-shell
