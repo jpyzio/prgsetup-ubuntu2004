@@ -17,6 +17,6 @@ fi
 
 grep 'max_user_watches' /etc/sysctl.conf
 if [[ "${?}" == "1" ]]; then
-    echo "fs.inotify.max_user_watches = 524288" | sudo tee --append /etc/sysctl.conf
-    sudo sysctl --load --system
+    echo "fs.inotify.max_user_watches = 524288" >> --append /etc/sysctl.conf
+    sysctl --load --system
 fi

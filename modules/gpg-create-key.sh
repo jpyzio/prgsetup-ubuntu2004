@@ -36,10 +36,10 @@ GPG_ID=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^sec:' | cut -
 if [[ -n "${GPG_ID}" ]]; then
     sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" ~/.bashrc ~/.zshrc
 
-    echo "export GPGKEY=${GPG_ID}" | tee --append ~/.bashrc | tee --append ~/.zshrc
+    echo "export GPGKEY=${GPG_ID}" | run_as_user tee --append ~/.bashrc | run_as_user tee --append ~/.zshrc
 
     if which git > /dev/null; then
-        git config --global user.signingkey "${GPG_ID}"
-        git config --global commit.gpgsign true
+        run_as_user git config --global user.signingkey "${GPG_ID}"
+        run_as_user git config --global commit.gpgsign true
     fi
 fi

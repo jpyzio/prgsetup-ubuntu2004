@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo snap install insomnia
+snap install insomnia

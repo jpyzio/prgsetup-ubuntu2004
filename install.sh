@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ "$(id -u)" -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
+
 set -o pipefail
 set -o xtrace
 
@@ -8,6 +13,10 @@ CONFIGURATOR_VERSION="20.04"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="${ROOT_DIR}/modules"
+
+run_as_user() {
+    sudo -i -u "$(logname)" "${@}"
+}
 
 text_input() {
     zenity --entry --title="Ubuntu Configurator" --text="${1}"
@@ -35,7 +44,7 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
-    CHOICES="self-update update"
+    CHOICES="self-update update docker-compose"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
@@ -44,9 +53,9 @@ fi
 
 if [[ "${INSTALATION_PROFILE}" == "full" ]]; then
     CHOICES="brave kvm-for-android-studio slack thunderbird mysql postgresql fiezilla rsync 7zip diff-utils insomnia postman nodejs-12 yarn php7.4-with-extensions" \
-    " composer composer-test-utils symfony-cli diagnostic-tools network-tools gparted smart-tools secure-delete docker docker-compose git git-hooks git-config gpg gpg-create-key" \
-    " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq cpufreq-set-performance jakub-user-groups vlc" \
-    " spotify libreoffice ufw rkhunter ssh-keygen ssh-server sshfs nfs ftpfs openvpn-client zsh tmux oh-my-zsh zsh-fzf jakoob-zsh-tuning virtualbox chrome firefox obs-studio signal"
+        " composer composer-test-utils symfony-cli diagnostic-tools network-tools gparted smart-tools secure-delete docker docker-compose git git-hooks git-config gpg gpg-create-key" \
+        " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq cpufreq-set-performance jakub-user-groups vlc" \
+        " spotify libreoffice ufw rkhunter ssh-keygen ssh-server sshfs nfs ftpfs openvpn-client zsh tmux oh-my-zsh zsh-fzf jakoob-zsh-tuning virtualbox chrome firefox obs-studio signal"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
@@ -116,7 +125,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "yarn" "yarn" off \
         "zsh-fzf" "zsh fzf" off \
         "zsh" "zsh" off \
-    3>&2 2>&1 1>&3)
+        3>&2 2>&1 1>&3)
 fi
 
 if [[ "${CHOICES}" == "" ]]; then
@@ -124,12 +133,12 @@ if [[ "${CHOICES}" == "" ]]; then
     exit 1
 fi
 
-sudo apt update
+apt update
 
-if [[ ! -f "${ROOT_DIR}/.installed" ]] ; then
+if [[ ! -f "${ROOT_DIR}/.installed" ]]; then
     # shellcheck disable=SC1090
     source "${MODULES_DIR}/update.sh"
-    date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.installed"
+    date '+%Y-%m-%d %H:%M:%S' >"${ROOT_DIR}/.installed"
 fi
 
 for CHOICE in ${CHOICES}; do
