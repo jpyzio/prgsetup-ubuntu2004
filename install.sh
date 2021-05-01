@@ -48,7 +48,7 @@ if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
-    CHOICES="update autoupdate zsh chrome thunderbird git sublime-text-3 ufw"
+    CHOICES="update zsh chrome thunderbird git sublime-text-3 ufw"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "full" ]]; then
