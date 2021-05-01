@@ -54,7 +54,7 @@ fi
 if [[ "${INSTALATION_PROFILE}" == "full" ]]; then
     CHOICES="brave kvm-for-android-studio slack thunderbird mysql postgresql fiezilla rsync 7zip diff-utils insomnia postman nodejs-12 yarn php7.4-with-extensions" \
         " composer composer-test-utils symfony-cli diagnostic-tools network-tools gparted smart-tools secure-delete docker docker-compose git git-hooks git-config gpg gpg-create-key" \
-        " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq cpufreq-set-performance jakub-user-groups vlc" \
+        " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq jakub-user-groups vlc" \
         " spotify libreoffice ufw rkhunter ssh-keygen ssh-server sshfs nfs ftpfs openvpn-client zsh tmux oh-my-zsh zsh-fzf jakoob-zsh-tuning virtualbox chrome firefox obs-studio signal"
 fi
 
@@ -66,7 +66,6 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "chrome" "chrome" off \
         "composer-test-utils" "composer test utils" off \
         "composer" "composer" off \
-        "cpufreq-set-performance" "cpufreq set performance" off \
         "cpufreq" "cpufreq" off \
         "diagnostic-tools" "diagnostic tools" off \
         "diff-utils" "diff utils" off \
