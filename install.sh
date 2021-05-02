@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 if [[ "$(id -u)" -ne 0 ]]; then
-    echo "This script must be run as root"
+    echo -e "\e[31mThis script must be run as root!\e[39m"
     exit 1
 fi
 
 set -o pipefail
 set -o xtrace
-
-# shellcheck disable=SC2034
-CONFIGURATOR_VERSION="20.04"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="${ROOT_DIR}/modules"
@@ -29,6 +26,7 @@ password_input() {
 }
 
 ### BEGIN System checker
+CONFIGURATOR_VERSION="20.04"
 UBUNTU_VERSION=$(lsb_release --release --short)
 
 if [[ "${UBUNTU_VERSION}" != "${CONFIGURATOR_VERSION}" ]]; then
@@ -38,7 +36,7 @@ fi
 ### END System checker
 
 INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    15 52 5 \
+    10 52 5 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
     "full" "All packages" off \
@@ -62,7 +60,7 @@ fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
-        30 77 22 \
+        20 77 15 \
         "7zip" "7zip" off \
         "brave" "Brave Browser" off \
         "chrome" "chrome" off \
@@ -139,7 +137,7 @@ apt update
 if [[ ! -f "${ROOT_DIR}/.installed" ]]; then
     # shellcheck disable=SC1090
     source "${MODULES_DIR}/update.sh"
-    date '+%Y-%m-%d %H:%M:%S' >"${ROOT_DIR}/.installed"
+    date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.installed"
 fi
 
 for CHOICE in ${CHOICES}; do

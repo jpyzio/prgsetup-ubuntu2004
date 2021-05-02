@@ -26,7 +26,7 @@ Name-Real: ${REAL_NAME}
 Name-Email: ${EMAIL}
 Expire-Date: 0
 Passphrase: ${GPG_PASSPHRASE}
-" >"${KEYGEN_CONFIG_FILE}"
+" > "${KEYGEN_CONFIG_FILE}"
 
 run_as_user gpg --gen-key --batch "${KEYGEN_CONFIG_FILE}"
 
