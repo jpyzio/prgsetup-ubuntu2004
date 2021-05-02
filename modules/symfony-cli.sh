@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 if ! which symfony > /dev/null; then
-    curl --silent --show-error https://get.symfony.com/cli/installer | bash
+    curl --silent --show-error https://get.symfony.com/cli/installer | run_as_user bash
 fi
 
 EXPORT_PATH="export PATH=\"\$HOME/.symfony/bin:\$PATH\""
 
-for FILE in ~/.bashrc ~/.zshrc; do
+for FILE in "${USER_HOME}/.bashrc" "${USER_HOME}/.zshrc"; do
     if ! grep --quiet "${EXPORT_PATH}" "${FILE}"; then
         echo "${EXPORT_PATH}" >> "${FILE}"
-        chown "$(logname)". "${FILE}"
+        chown "${USER_NAME}". "${FILE}"
     fi
 done

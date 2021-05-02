@@ -3,5 +3,5 @@
 apt install --yes virtualbox virtualbox-ext-pack
 
 if ! groups | grep --quiet vboxusers; then
-    adduser "${USER}" vboxusers
+    adduser "${USER_NAME}" vboxusers
 fi

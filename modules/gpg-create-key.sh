@@ -28,15 +28,15 @@ Expire-Date: 0
 Passphrase: ${GPG_PASSPHRASE}
 " >"${KEYGEN_CONFIG_FILE}"
 
-gpg --gen-key --batch "${KEYGEN_CONFIG_FILE}"
+run_as_user gpg --gen-key --batch "${KEYGEN_CONFIG_FILE}"
 
 shred --remove --iterations=100 "${KEYGEN_CONFIG_FILE}"
 
 GPG_ID=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^sec:' | cut --delimiter ':' --fields 5)
 if [[ -n "${GPG_ID}" ]]; then
-    sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" ~/.bashrc ~/.zshrc
+    sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" "${USER_HOME}/.bashrc" "${USER_HOME}/.zshrc"
 
-    echo "export GPGKEY=${GPG_ID}" | run_as_user tee --append ~/.bashrc | run_as_user tee --append ~/.zshrc
+    echo "export GPGKEY=${GPG_ID}" | run_as_user tee --append "${USER_HOME}/.bashrc" | run_as_user tee --append "${USER_HOME}/.zshrc"
 
     if which git > /dev/null; then
         run_as_user git config --global user.signingkey "${GPG_ID}"

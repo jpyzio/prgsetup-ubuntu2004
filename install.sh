@@ -13,9 +13,11 @@ CONFIGURATOR_VERSION="20.04"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="${ROOT_DIR}/modules"
+USER_NAME="$(logname)"
+USER_HOME="$(eval echo ~"${USER_NAME}")"
 
 run_as_user() {
-    sudo -i -u "$(logname)" "${@}"
+    sudo -i -u "${USER_NAME}" "${@}"
 }
 
 text_input() {

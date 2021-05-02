@@ -9,9 +9,9 @@ EXPORT_PATH="export PATH=\"\$HOME/.composer/vendor/bin:\$PATH\""
 curl --silent --show-error https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
-for FILE in ~/.bashrc ~/.zshrc; do
+for FILE in ${USER_HOME}/.bashrc ${USER_HOME}/.zshrc; do
     if ! grep --quiet "${EXPORT_PATH}" "${FILE}"; then
         echo "${EXPORT_PATH}" >> "${FILE}"
-        chown "$(logname)". "${FILE}"
+        chown "${USER_NAME}". "${FILE}"
     fi
 done

@@ -6,10 +6,10 @@ if ! which yarn > /dev/null; then
 
     apt update && apt install --yes yarn
 
-    for FILE in ~/.bashrc ~/.zshrc; do
+    for FILE in "${USER_HOME}/.bashrc" "${USER_HOME}/.zshrc"; do
         if ! grep --quiet -E 'export.*yarn\/bin' "${FILE}"; then
             echo "export PATH=\"\$PATH:$(yarn global bin)\"" >> "${FILE}"
-            chown "$(logname)". "${FILE}"
+            chown "${USER_NAME}". "${FILE}"
         fi
     done
 fi

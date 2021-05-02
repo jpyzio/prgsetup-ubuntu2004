@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ ! -d ~/.fzf ]]; then
-    DIR_PATH=~/.fzf
+DIR_PATH="${USER_HOME}/.fzf"
+if [[ ! -d "${DIR_PATH}" ]]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git "${DIR_PATH}"
-    chown -R $(logname). "${DIR_PATH}"
-    ~/.fzf/install --all
+    chown -R "${USER_NAME}". "${DIR_PATH}"
+    "${USER_HOME}/.fzf/install" --all
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! -f ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox ]]; then
+if [[ ! -f "${USER_HOME}/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox" ]]; then
     RELEASE_JSON=$(curl --silent "https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release")
     LATEST_URL=$(printf %s "${RELEASE_JSON}" | jq '.TBA[0].downloads.linux.link' | tr --delete '"')
     LATEST_BUILD=$(printf %s "${RELEASE_JSON}" | jq '.TBA[0].build' | tr --delete '"')
