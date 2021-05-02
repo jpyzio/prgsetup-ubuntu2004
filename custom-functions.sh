@@ -1,1 +1,0 @@
-alias wanip='curl -s http://whatismyip.akamai.com/;echo'
