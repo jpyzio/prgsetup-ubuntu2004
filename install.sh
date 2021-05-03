@@ -8,6 +8,7 @@ fi
 set -o pipefail
 set -o xtrace
 
+SHOULD_REBOOT=false
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="${ROOT_DIR}/modules"
 USER_NAME="$(logname)"
@@ -146,6 +147,8 @@ for CHOICE in ${CHOICES}; do
     source "${MODULES_DIR}/${CHOICE}.sh"
 done
 
-if zenity --question --text="Do you want to reboot your system?"; then
-    reboot
+if ${SHOULD_REBOOT}; then
+  if zenity --question --text="Do you want to reboot your system?"; then
+      reboot
+  fi
 fi
