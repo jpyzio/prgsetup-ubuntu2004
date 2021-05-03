@@ -95,6 +95,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "php8.0-with-extensions" "PHP 8.0 with extensions" off \
         "postgresql" "postgresql" off \
         "postman" "postman" off \
+        "prusa-slicer" "Prusa Slicer" off \
         "rkhunter" "rkhunter" off \
         "rsync" "rsync" off \
         "secure-delete" "secure delete" off \
