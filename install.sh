@@ -45,10 +45,11 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
     CHOICES="self-update update docker-compose"
+    date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.last_update"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
-    CHOICES="update zsh chrome thunderbird git sublime-text-3 ufw"
+    CHOICES="update brave thunderbird git sublime-text-3 ufw"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
@@ -140,7 +141,7 @@ for CHOICE in ${CHOICES}; do
 done
 
 if ${SHOULD_REBOOT}; then
-  if zenity --question --text="Do you want to reboot your system?"; then
-      reboot
-  fi
+    if zenity --question --text="Do you want to reboot your system?"; then
+        reboot
+    fi
 fi

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which insomnia > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which insomnia > /dev/null; then
     snap install insomnia
 fi

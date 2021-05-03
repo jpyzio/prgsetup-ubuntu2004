@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if ! which gpg > /dev/null; then
-	source "${MODULES_DIR}/gpg.sh"
+    source "${MODULES_DIR}/gpg.sh"
 fi
 
 KEYGEN_CONFIG_FILE="${ROOT_DIR}/keygen_config"
@@ -32,7 +32,7 @@ run_as_user gpg --gen-key --batch "${KEYGEN_CONFIG_FILE}"
 
 shred --remove --iterations=100 "${KEYGEN_CONFIG_FILE}"
 
-GPG_ID=$(gpg --list-secret-keys --with-colons 2>/dev/null | grep '^sec:' | cut --delimiter ':' --fields 5)
+GPG_ID=$(gpg --list-secret-keys --with-colons 2> /dev/null | grep '^sec:' | cut --delimiter ':' --fields 5)
 if [[ -n "${GPG_ID}" ]]; then
     sed --in-place --regexp-extended "s/.*export GPGKEY.*\n//g" "${USER_HOME}/.bashrc" "${USER_HOME}/.zshrc"
 

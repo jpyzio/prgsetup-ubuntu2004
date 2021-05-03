@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if ! which git > /dev/null; then
-	source "${MODULES_DIR}/git.sh"
+    source "${MODULES_DIR}/git.sh"
 fi
 
 USER_GIT_TEMPLATES_DIR="${USER_HOME}/.git-templates"

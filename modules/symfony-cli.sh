@@ -2,6 +2,8 @@
 
 if ! which symfony > /dev/null; then
     curl --silent --show-error https://get.symfony.com/cli/installer | run_as_user bash
+else
+    symfony self-update
 fi
 
 EXPORT_PATH="export PATH=\"\$HOME/.symfony/bin:\$PATH\""

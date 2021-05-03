@@ -15,7 +15,6 @@ sed --in-place --regexp-extended "s/.*HostbasedAuthentication.*/HostbasedAuthent
 
 service ssh restart
 
-which ssh > /dev/null
-if [[ "${?}" == "0" ]]; then
+if which ufw > /dev/null; then
     ufw allow ssh
 fi

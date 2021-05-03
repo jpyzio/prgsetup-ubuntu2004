@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which postman > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which postman > /dev/null; then
     snap install postman
 fi

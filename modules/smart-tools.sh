@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-apt install --yes gsmartcontrol  smartmontools --no-install-recommends
+apt install --yes gsmartcontrol smartmontools --no-install-recommends
