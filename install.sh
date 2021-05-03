@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
+if [[ "$(id -u)" -ne 0 ]]; then
+    echo -e "\e[31mThis script must be run as root!\e[39m"
+    exit 1
+fi
+
 set -o pipefail
 set -o xtrace
 
-# shellcheck disable=SC2034
-CONFIGURATOR_VERSION="20.04"
-
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="${ROOT_DIR}/modules"
+USER_NAME="$(logname)"
+USER_HOME="$(eval echo ~"${USER_NAME}")"
+
+run_as_user() {
+    sudo -i -u "${USER_NAME}" "${@}"
+}
 
 text_input() {
     zenity --entry --title="Ubuntu Configurator" --text="${1}"
@@ -18,6 +26,7 @@ password_input() {
 }
 
 ### BEGIN System checker
+CONFIGURATOR_VERSION="20.04"
 UBUNTU_VERSION=$(lsb_release --release --short)
 
 if [[ "${UBUNTU_VERSION}" != "${CONFIGURATOR_VERSION}" ]]; then
@@ -27,7 +36,7 @@ fi
 ### END System checker
 
 INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    15 52 5 \
+    10 52 5 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
     "full" "All packages" off \
@@ -35,29 +44,28 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
-    CHOICES="self-update update"
+    CHOICES="self-update update docker-compose"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
-    CHOICES="update autoupdate zsh chrome thunderbird git sublime-text-3 ufw"
+    CHOICES="update zsh chrome thunderbird git sublime-text-3 ufw"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "full" ]]; then
     CHOICES="brave kvm-for-android-studio slack thunderbird mysql postgresql fiezilla rsync 7zip diff-utils insomnia postman nodejs-12 yarn php7.4-with-extensions" \
-    " composer composer-test-utils symfony-cli diagnostic-tools network-tools gparted smart-tools secure-delete docker docker-compose git git-hooks git-config gpg gpg-create-key" \
-    " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq cpufreq-set-performance jakub-user-groups vlc" \
-    " spotify libreoffice ufw rkhunter ssh-keygen ssh-server sshfs nfs ftpfs openvpn-client zsh tmux oh-my-zsh zsh-fzf jakoob-zsh-tuning virtualbox chrome firefox obs-studio signal"
+        " composer composer-test-utils symfony-cli diagnostic-tools network-tools gparted smart-tools secure-delete docker docker-compose git git-hooks git-config gpg gpg-create-key" \
+        " gimp webp nautilus-extensions sublime-text-3 jetbrains-toolbox jakoob-system-dock jakoob-aliases shellcheck speedtest cpufreq jakub-user-groups vlc" \
+        " spotify libreoffice ufw rkhunter ssh-keygen ssh-server sshfs nfs ftpfs openvpn-client zsh tmux oh-my-zsh zsh-fzf jakoob-zsh-tuning virtualbox chrome firefox obs-studio signal"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
-        30 77 22 \
+        20 77 15 \
         "7zip" "7zip" off \
         "brave" "Brave Browser" off \
         "chrome" "chrome" off \
         "composer-test-utils" "composer test utils" off \
         "composer" "composer" off \
-        "cpufreq-set-performance" "cpufreq set performance" off \
         "cpufreq" "cpufreq" off \
         "diagnostic-tools" "diagnostic tools" off \
         "diff-utils" "diff utils" off \
@@ -116,7 +124,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "yarn" "yarn" off \
         "zsh-fzf" "zsh fzf" off \
         "zsh" "zsh" off \
-    3>&2 2>&1 1>&3)
+        3>&2 2>&1 1>&3)
 fi
 
 if [[ "${CHOICES}" == "" ]]; then
@@ -124,9 +132,9 @@ if [[ "${CHOICES}" == "" ]]; then
     exit 1
 fi
 
-sudo apt update
+apt update
 
-if [[ ! -f "${ROOT_DIR}/.installed" ]] ; then
+if [[ ! -f "${ROOT_DIR}/.installed" ]]; then
     # shellcheck disable=SC1090
     source "${MODULES_DIR}/update.sh"
     date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.installed"

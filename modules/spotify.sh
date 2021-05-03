@@ -2,5 +2,5 @@
 
 which spotify > /dev/null
 if [[ "${?}" == "1" ]]; then
-    sudo snap install spotify
+    snap install spotify
 fi

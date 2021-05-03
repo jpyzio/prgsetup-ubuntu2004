@@ -1,6 +1,6 @@
 # WORK IN PROGRESS
 
-# WIP!!! Ubuntu 20.04 LTS for programmers WIP!!!
+# Ubuntu 20.04 LTS installer for programmers
 Ubuntu script provides a ready environment for programmers, but not only.
 
 ### Prerequisites
@@ -12,7 +12,7 @@ sudo apt update && sudo apt install --yes git
 Download and execute the configurator
 ```bash
 git clone https://github.com/jpyzio/prgsetup-ubuntu2004.git ~/.prgsetup
-bash ~/.prgsetup/install.sh
+sudo bash ~/.prgsetup/install.sh
 ```
 
 ## Contributing

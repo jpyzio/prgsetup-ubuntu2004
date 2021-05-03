@@ -2,5 +2,5 @@
 
 which subl > /dev/null
 if [[ "${?}" == "1" ]]; then
-    sudo snap install sublime-text --classic
+    snap install sublime-text --classic
 fi
