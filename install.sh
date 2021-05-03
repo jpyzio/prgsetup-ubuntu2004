@@ -45,6 +45,7 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
     CHOICES="self-update update docker-compose"
+    date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.last_update"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
