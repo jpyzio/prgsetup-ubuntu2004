@@ -1,5 +1,3 @@
-# WORK IN PROGRESS
-
 # Ubuntu 20.04 LTS installer for programmers
 
 Ubuntu script provides a ready environment for programmers, but not only.
