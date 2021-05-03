@@ -141,7 +141,7 @@ for CHOICE in ${CHOICES}; do
 done
 
 if ${SHOULD_REBOOT}; then
-  if zenity --question --text="Do you want to reboot your system?"; then
-      reboot
-  fi
+    if zenity --question --text="Do you want to reboot your system?"; then
+        reboot
+    fi
 fi
