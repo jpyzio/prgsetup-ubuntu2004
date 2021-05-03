@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 BIN_DIR="${USER_HOME}/bin"
-FILE_URL="https://github.com/prusa3d/PrusaSlicer/releases/download/version_2.3.1/PrusaSlicer-2.3.1+linux-x64-202104161339.AppImage"
+
+FILE_URL=$(curl -s https://api.github.com/repos/prusa3d/PrusaSlicer/releases/latest | grep AppImage | grep browser_download_url | grep -E 'https\:\/\/.*\-x64\-20' | xargs | cut -d ' ' -f2)
 
 mkdir -p "${BIN_DIR}"
 
