@@ -7,11 +7,11 @@ fi
 KEYGEN_CONFIG_FILE="${ROOT_DIR}/keygen_config"
 
 while [[ -z ${REAL_NAME} ]]; do
-    REAL_NAME=$(input "Your Real Name")
+    REAL_NAME=$(text_input "Your Real Name")
 done
 
 while [[ -z ${EMAIL} ]]; do
-    EMAIL=$(input "Your Email")
+    EMAIL=$(text_input "Your Email")
 done
 
 while [[ -z ${GPG_PASSPHRASE} ]]; do
