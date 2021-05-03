@@ -49,7 +49,7 @@ if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
-    CHOICES="update zsh chrome thunderbird git sublime-text-3 ufw"
+    CHOICES="update brave thunderbird git sublime-text-3 ufw"
 fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
