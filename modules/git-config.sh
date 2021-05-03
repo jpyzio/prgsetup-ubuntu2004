@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if ! which git > /dev/null; then
-	source "${MODULES_DIR}/git.sh"
+    source "${MODULES_DIR}/git.sh"
 fi
 
 while [[ -z ${REAL_NAME} ]]; do
@@ -9,12 +9,10 @@ while [[ -z ${REAL_NAME} ]]; do
 done
 run_as_user git config --global user.name "${REAL_NAME}"
 
-
 while [[ -z ${EMAIL} ]]; do
     EMAIL=$(text_input "Git Global - Your Email:")
 done
 run_as_user git config --global user.email "${EMAIL}"
-
 
 PUSH_DEFAULT=$(text_input "Git Global - Push default: [current]")
 if [[ -z ${PUSH_DEFAULT} ]]; then
@@ -22,6 +20,6 @@ if [[ -z ${PUSH_DEFAULT} ]]; then
 fi
 run_as_user git config --global push.default "${PUSH_DEFAULT}"
 
-if ! grep --quiet 'excludesfile' "${USER_HOME}/.gitconfig" ; then
+if ! grep --quiet 'excludesfile' "${USER_HOME}/.gitconfig"; then
     run_as_user git config --global core.excludesfile "${ROOT_DIR}/.gitignore_global"
 fi
