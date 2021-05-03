@@ -44,7 +44,16 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
-    CHOICES="self-update update docker-compose"
+    CHOICES="self-update update"
+
+    if which docker-compose > /dev/null; then
+        CHOICES="${CHOICES} docker-compose"
+    fi
+
+    if [[ -f "${USER_HOME}/bin/PrusaSlicer.AppImage" ]]; then
+        CHOICES="${CHOICES} prusa-slicer"
+    fi
+
     date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.last_update"
 fi
 
