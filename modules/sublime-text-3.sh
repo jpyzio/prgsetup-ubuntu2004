@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which subl > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which subl > /dev/null; then
     snap install sublime-text --classic
 fi

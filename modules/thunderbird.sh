@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which thunderbird > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which thunderbird > /dev/null; then
     apt install --yes thunderbird
 fi

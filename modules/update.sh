@@ -23,8 +23,7 @@ apt full-upgrade --yes
 
 snap refresh
 
-which composer > /dev/null
-if [[ "${?}" == "0" ]]; then
+if ! which composer > /dev/null; then
     "${MODULES_DIR}/composer.sh"
     run_as_user composer global update
 fi

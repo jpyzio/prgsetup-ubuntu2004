@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which slack > /dev/null
-if [[ "${?}" == "1" ]]; then
+if ! which slack > /dev/null; then
     snap install slack --classic
 fi
