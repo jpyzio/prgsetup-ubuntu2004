@@ -15,3 +15,5 @@ systemctl enable docker
 service docker restart
 
 echo -e "\e[31mWARNING!!! Before you use the docker command without \"sudo\", please restart the system!\e[39m"
+
+SHOULD_REBOOT=true
