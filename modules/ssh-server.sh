@@ -16,5 +16,5 @@ sed --in-place --regexp-extended "s/.*HostbasedAuthentication.*/HostbasedAuthent
 service ssh restart
 
 if which ufw > /dev/null; then
-    ufw allow ssh
+    ufw allow ssh comment "SSH"
 fi
