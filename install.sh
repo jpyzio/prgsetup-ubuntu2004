@@ -81,6 +81,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "git-config" "git config" off \
         "git-hooks" "git hooks" off \
         "git" "git" off \
+        "gnome" "Gnome tools" off \
         "gparted" "gparted" off \
         "gpg-create-key" "gpg create key" off \
         "gpg" "gpg" off \
