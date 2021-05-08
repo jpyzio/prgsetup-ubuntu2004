@@ -2,5 +2,7 @@
 
 if ! which zsh > /dev/null; then
     apt install --yes zsh
-    chsh --shell /bin/zsh
+    run_as_user chsh --shell $(which zsh)
+
+    SHOULD_REBOOT=true
 fi

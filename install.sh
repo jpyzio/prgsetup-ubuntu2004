@@ -99,7 +99,6 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "nfs" "nfs" off \
         "nodejs-12" "nodejs 12" off \
         "obs-studio" "OBS Studio" off \
-        "oh-my-zsh" "oh my zsh" off \
         "openvpn-client" "openvpn client" off \
         "php7.4-with-extensions" "PHP 7.4 with extensions" off \
         "php8.0-with-extensions" "PHP 8.0 with extensions" off \
@@ -127,8 +126,9 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "vlc" "vlc" off \
         "webp" "webp" off \
         "yarn" "yarn" off \
-        "zsh-fzf" "zsh fzf" off \
         "zsh" "zsh" off \
+        "zsh-fzf" "zsh fzf" off \
+        "zsh-oh-my-zsh" "Oh my ZSH" off \
         3>&2 2>&1 1>&3)
 fi
 
