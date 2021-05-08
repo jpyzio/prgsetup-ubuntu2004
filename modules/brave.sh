@@ -11,5 +11,5 @@ if ! which brave-browser > /dev/null; then
 
     apt update
 
-    apt install brave-browser
+    apt install --yes brave-browser
 fi
