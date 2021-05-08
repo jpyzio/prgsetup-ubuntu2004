@@ -67,28 +67,27 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "7zip" "7zip" off \
         "brave" "Brave Browser" off \
         "chrome" "chrome" off \
-        "composer-test-utils" "composer test utils" off \
         "composer" "composer" off \
+        "composer-test-utils" "composer test utils" off \
         "cpufreq" "cpufreq" off \
         "diagnostic-tools" "diagnostic tools" off \
         "diff-utils" "diff utils" off \
-        "docker-compose" "docker compose" off \
         "docker" "docker" off \
+        "docker-compose" "docker compose" off \
         "fiezilla" "fiezilla" off \
         "firefox" "firefox" off \
         "ftpfs" "ftpfs" off \
         "gimp" "gimp" off \
+        "git" "git" off \
         "git-config" "git config" off \
         "git-hooks" "git hooks" off \
-        "git" "git" off \
         "gnome" "Gnome tools" off \
         "gparted" "gparted" off \
-        "gpg-create-key" "gpg create key" off \
         "gpg" "gpg" off \
+        "gpg-create-key" "gpg create key" off \
         "insomnia" "insomnia" off \
         "jakoob-aliases" "jakoob aliases" off \
         "jakoob-system-dock" "jakoob system dock" off \
-        "jakoob-zsh-tuning" "jakoob zsh tuning" off \
         "jakub-user-groups" "jakub user groups" off \
         "jetbrains-toolbox" "jetbrains toolbox" off \
         "kvm-for-android-studio" "kvm for android studio" off \
@@ -129,6 +128,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
         "zsh" "zsh" off \
         "zsh-fzf" "zsh fzf" off \
         "zsh-oh-my-zsh" "Oh my ZSH" off \
+        "jakoob-zsh-tuning" "jakoob zsh tuning" off \
         3>&2 2>&1 1>&3)
 fi
 
