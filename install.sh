@@ -26,6 +26,14 @@ password_input() {
     zenity --password --title="Ubuntu Configurator" --text="${1}"
 }
 
+function is_installed() {
+    if grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"; then
+        echo "off"
+    else
+        echo "on"
+    fi
+}
+
 ### BEGIN System checker
 CONFIGURATOR_VERSION="20.04"
 UBUNTU_VERSION=$(lsb_release --release --short)
@@ -64,71 +72,71 @@ fi
 if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
         20 77 15 \
-        "7zip" "7zip" off \
-        "brave" "Brave Browser" off \
-        "chrome" "chrome" off \
-        "composer" "composer" off \
-        "composer-test-utils" "composer test utils" off \
-        "cpufreq" "cpufreq" off \
-        "diagnostic-tools" "diagnostic tools" off \
-        "diff-utils" "diff utils" off \
-        "docker" "docker" off \
-        "docker-compose" "docker compose" off \
-        "fiezilla" "fiezilla" off \
-        "firefox" "firefox" off \
-        "ftpfs" "ftpfs" off \
-        "gimp" "gimp" off \
-        "git" "git" off \
-        "git-config" "git config" off \
-        "git-hooks" "git hooks" off \
-        "gnome" "Gnome tools" off \
-        "gparted" "gparted" off \
-        "gpg" "gpg" off \
-        "gpg-create-key" "gpg create key" off \
-        "insomnia" "insomnia" off \
-        "jakoob-aliases" "jakoob aliases" off \
-        "jakoob-system-dock" "jakoob system dock" off \
-        "jakub-user-groups" "jakub user groups" off \
-        "jetbrains-toolbox" "jetbrains toolbox" off \
-        "kvm-for-android-studio" "kvm for android studio" off \
-        "libreoffice" "libreoffice" off \
-        "mysql" "mysql" off \
-        "nautilus-extensions" "nautilus extensions" off \
-        "network-tools" "network tools" off \
-        "nfs" "nfs" off \
-        "nodejs-12" "nodejs 12" off \
-        "obs-studio" "OBS Studio" off \
-        "openvpn-client" "openvpn client" off \
-        "php7.4-with-extensions" "PHP 7.4 with extensions" off \
-        "php8.0-with-extensions" "PHP 8.0 with extensions" off \
-        "postgresql" "postgresql" off \
-        "postman" "postman" off \
-        "prusa-slicer" "Prusa Slicer" off \
-        "rkhunter" "rkhunter" off \
-        "rsync" "rsync" off \
-        "secure-delete" "secure delete" off \
-        "shellcheck" "shellcheck" off \
-        "signal" "Signal" off \
-        "slack" "slack" off \
-        "smart-tools" "smart tools" off \
-        "speedtest" "speedtest" off \
-        "spotify" "spotify" off \
-        "ssh-keygen" "ssh keygen" off \
-        "ssh-server" "ssh server" off \
-        "sshfs" "sshfs" off \
-        "sublime-text-3" "sublime text 3" off \
-        "symfony-cli" "symfony cli" off \
-        "thunderbird" "thunderbird" off \
-        "tmux" "tmux" off \
-        "ufw" "ufw" off \
-        "virtualbox" "virtualbox" off \
-        "vlc" "vlc" off \
-        "webp" "webp" off \
-        "yarn" "yarn" off \
-        "zsh" "zsh" off \
-        "zsh-fzf" "zsh fzf" off \
-        "zsh-oh-my-zsh" "Oh my ZSH" off \
-        "jakoob-zsh-tuning" "jakoob zsh tuning" off \
+        "7zip" "7zip" $(is_installed "7zip") \
+        "brave" "Brave Browser" $(is_installed "brave") \
+        "chrome" "chrome" $(is_installed "chrome") \
+        "composer" "composer" $(is_installed "composer") \
+        "composer-test-utils" "composer test utils" $(is_installed "composer-test-utils") \
+        "cpufreq" "cpufreq" $(is_installed "cpufreq") \
+        "diagnostic-tools" "diagnostic tools" $(is_installed "diagnostic-tools") \
+        "diff-utils" "diff utils" $(is_installed "diff-utils") \
+        "docker" "docker" $(is_installed "docker") \
+        "docker-compose" "docker compose" $(is_installed "docker-compose") \
+        "fiezilla" "fiezilla" $(is_installed "fiezilla") \
+        "firefox" "firefox" $(is_installed "firefox") \
+        "ftpfs" "ftpfs" $(is_installed "ftpfs") \
+        "gimp" "gimp" $(is_installed "gimp") \
+        "git" "git" $(is_installed "git") \
+        "git-config" "git config" $(is_installed "git-config") \
+        "git-hooks" "git hooks" $(is_installed "git-hooks") \
+        "gnome" "Gnome tools" $(is_installed "gnome") \
+        "gparted" "gparted" $(is_installed "gparted") \
+        "gpg" "gpg" $(is_installed "gpg") \
+        "gpg-create-key" "gpg create key" $(is_installed "gpg-create-key") \
+        "insomnia" "insomnia" $(is_installed "insomnia") \
+        "jakoob-aliases" "jakoob aliases" $(is_installed "jakoob-aliases") \
+        "jakoob-system-dock" "jakoob system dock" $(is_installed "jakoob-system-dock") \
+        "jakub-user-groups" "jakub user groups" $(is_installed "jakub-user-groups") \
+        "jetbrains-toolbox" "jetbrains toolbox" $(is_installed "jetbrains-toolbox") \
+        "kvm-for-android-studio" "kvm for android studio" $(is_installed "kvm-for-android-studio") \
+        "libreoffice" "libreoffice" $(is_installed "libreoffice") \
+        "mysql" "mysql" $(is_installed "mysql") \
+        "nautilus-extensions" "nautilus extensions" $(is_installed "nautilus-extensions") \
+        "network-tools" "network tools" $(is_installed "network-tools") \
+        "nfs" "nfs" $(is_installed "nfs") \
+        "nodejs-12" "nodejs 12" $(is_installed "nodejs-12") \
+        "obs-studio" "OBS Studio" $(is_installed "obs-studio") \
+        "openvpn-client" "openvpn client" $(is_installed "openvpn-client") \
+        "php7.4-with-extensions" "PHP 7.4 with extensions" $(is_installed "php7.4-with-extensions") \
+        "php8.0-with-extensions" "PHP 8.0 with extensions" $(is_installed "php8.0-with-extensions") \
+        "postgresql" "postgresql" $(is_installed "postgresql") \
+        "postman" "postman" $(is_installed "postman") \
+        "prusa-slicer" "Prusa Slicer" $(is_installed "prusa-slicer") \
+        "rkhunter" "rkhunter" $(is_installed "rkhunter") \
+        "rsync" "rsync" $(is_installed "rsync") \
+        "secure-delete" "secure delete" $(is_installed "secure-delete") \
+        "shellcheck" "shellcheck" $(is_installed "shellcheck") \
+        "signal" "Signal" $(is_installed "signal") \
+        "slack" "slack" $(is_installed "slack") \
+        "smart-tools" "smart tools" $(is_installed "smart-tools") \
+        "speedtest" "speedtest" $(is_installed "speedtest") \
+        "spotify" "spotify" $(is_installed "spotify") \
+        "ssh-keygen" "ssh keygen" $(is_installed "ssh-keygen") \
+        "ssh-server" "ssh server" $(is_installed "ssh-server") \
+        "sshfs" "sshfs" $(is_installed "sshfs") \
+        "sublime-text-3" "sublime text 3" $(is_installed "sublime-text-3") \
+        "symfony-cli" "symfony cli" $(is_installed "symfony-cli") \
+        "thunderbird" "thunderbird" $(is_installed "thunderbird") \
+        "tmux" "tmux" $(is_installed "tmux") \
+        "ufw" "ufw" $(is_installed "ufw") \
+        "virtualbox" "virtualbox" $(is_installed "virtualbox") \
+        "vlc" "vlc" $(is_installed "vlc") \
+        "webp" "webp" $(is_installed "webp") \
+        "yarn" "yarn" $(is_installed "yarn") \
+        "zsh" "zsh" $(is_installed "zsh") \
+        "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
+        "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
+        "jakoob-zsh-tuning" "jakoob zsh tuning" $(is_installed "jakoob-zsh-tuning") \
         3>&2 2>&1 1>&3)
 fi
 
@@ -144,6 +152,8 @@ if [[ ! -f "${ROOT_DIR}/.installed" ]]; then
     source "${MODULES_DIR}/update.sh"
     date '+%Y-%m-%d %H:%M:%S' > "${ROOT_DIR}/.installed"
 fi
+
+echo "${CHOICES}" >> "${ROOT_DIR}/.installed_modules"
 
 for CHOICE in ${CHOICES}; do
     CHOICE=$(echo "${CHOICE}" | tr --delete '"')
