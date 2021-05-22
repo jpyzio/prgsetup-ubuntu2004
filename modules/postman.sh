@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-sudo snap install postman
+if ! which postman > /dev/null; then
+    snap install postman
+fi

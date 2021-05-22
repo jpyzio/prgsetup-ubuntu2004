@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo apt install --yes shellcheck
+apt install --yes shellcheck

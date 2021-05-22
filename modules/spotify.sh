@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-which spotify > /dev/null
-if [[ "${?}" == "1" ]]; then
-    sudo snap install spotify
+if ! which spotify > /dev/null; then
+    snap install spotify
 fi

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-sudo apt install --yes zsh
-chsh -s /bin/zsh
+if ! which zsh > /dev/null; then
+    apt install --yes zsh
+    run_as_user chsh --shell $(which zsh)
+
+    SHOULD_REBOOT=true
+fi

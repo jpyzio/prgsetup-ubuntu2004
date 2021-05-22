@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-sudo snap install insomnia
+if ! which insomnia > /dev/null; then
+    snap install insomnia
+fi

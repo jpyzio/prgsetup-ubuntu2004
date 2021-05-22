@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo apt install --yes meld diffutils
+apt install --yes meld diffutils

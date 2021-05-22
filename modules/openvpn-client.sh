@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo apt install --yes network-manager-openvpn
+apt install --yes network-manager-openvpn
