@@ -73,6 +73,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
         20 77 15 \
         "7zip" "7zip" $(is_installed "7zip") \
+        "blender" "Blender" $(is_installed "blender") \
         "brave" "Brave Browser" $(is_installed "brave") \
         "chrome" "chrome" $(is_installed "chrome") \
         "composer" "composer" $(is_installed "composer") \
