@@ -97,9 +97,6 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "gpg" "gpg" $(is_installed "gpg") \
         "gpg-create-key" "gpg create key" $(is_installed "gpg-create-key") \
         "insomnia" "insomnia" $(is_installed "insomnia") \
-        "jakoob-aliases" "jakoob aliases" $(is_installed "jakoob-aliases") \
-        "jakoob-system-dock" "jakoob system dock" $(is_installed "jakoob-system-dock") \
-        "jakub-user-groups" "jakub user groups" $(is_installed "jakub-user-groups") \
         "jetbrains-toolbox" "jetbrains toolbox" $(is_installed "jetbrains-toolbox") \
         "kvm-for-android-studio" "kvm for android studio" $(is_installed "kvm-for-android-studio") \
         "libreoffice" "libreoffice" $(is_installed "libreoffice") \
@@ -139,7 +136,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "zsh" "zsh" $(is_installed "zsh") \
         "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
         "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
-        "jakoob-zsh-tuning" "jakoob zsh tuning" $(is_installed "jakoob-zsh-tuning") \
+        "jakub-customs" "Jacob's specific modifications of the system" $(is_installed "jakub-customs") \
         3>&2 2>&1 1>&3)
 fi
 
