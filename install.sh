@@ -15,7 +15,7 @@ USER_NAME="$(logname)"
 USER_HOME="$(eval echo ~"${USER_NAME}")"
 
 run_as_user() {
-    sudo -i -u "${USER_NAME}" "${@}"
+    sudo -i -H -u "${USER_NAME}" "${@}"
 }
 
 text_input() {
