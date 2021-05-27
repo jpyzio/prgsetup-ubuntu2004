@@ -60,7 +60,7 @@ if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
         CHOICES="${CHOICES} docker-compose"
     fi
 
-    if [[ -f "${USER_HOME}/bin/PrusaSlicer.AppImage" ]]; then
+    if [[ -f "${ROOT_DIR}/bin/PrusaSlicer.AppImage" ]]; then
         CHOICES="${CHOICES} prusa-slicer"
     fi
 

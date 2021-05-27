@@ -10,3 +10,5 @@ if ! which git > /dev/null; then
 fi
 
 git pull
+
+chown -R "${USER_NAME}". "${ROOT_DIR}"
