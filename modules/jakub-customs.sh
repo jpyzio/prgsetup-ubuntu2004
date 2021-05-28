@@ -2,6 +2,14 @@
 
 cat "${ROOT_DIR}/assets/dconf-settings.ini" | sed 's|ROOT_DIR|'${ROOT_DIR}'|g' | run_as_user dconf load /
 
+run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
+
+# ====================================================================================================================================
+
+run_as_user gsettings set org.gnome.desktop.interface clock-show-seconds true
+run_as_user gsettings set org.gnome.desktop.interface clock-show-weekday true
+run_as_user gsettings set org.gnome.desktop.interface show-battery-percentage true
+
 # ====================================================================================================================================
 
 for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
@@ -11,12 +19,6 @@ for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
         fi
     fi
 done
-
-# ====================================================================================================================================
-
-run_as_user gsettings set org.gnome.desktop.interface clock-show-seconds true
-run_as_user gsettings set org.gnome.desktop.interface clock-show-weekday true
-run_as_user gsettings set org.gnome.desktop.interface show-battery-percentage true
 
 # ====================================================================================================================================
 
@@ -35,3 +37,23 @@ for FILE in ${USER_HOME}/.bashrc ${USER_HOME}/.zshrc; do
     fi  
         chown "${USER_NAME}". "${FILE}"
 done
+
+# ====================================================================================================================================
+
+if ! which google-chrome > /dev/null; then
+    source "${MODULES_DIR}/google-chrome.sh"
+fi
+
+run_as_user google-chrome https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep/
+
+run_as_user google-chrome https://extensions.gnome.org/extension/1271/sound-settings/ \
+    https://extensions.gnome.org/extension/7/removable-drive-menu/ \
+    https://extensions.gnome.org/extension/750/openweather/ \
+    https://extensions.gnome.org/extension/104/netspeed/ \
+    https://extensions.gnome.org/extension/1465/desktop-icons/ \
+    https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/ \
+    https://extensions.gnome.org/extension/945/cpu-power-manager/
+
+# ====================================================================================================================================
+
+SHOULD_REBOOT=true
