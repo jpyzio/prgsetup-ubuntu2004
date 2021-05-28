@@ -27,7 +27,8 @@ password_input() {
 }
 
 function is_installed() {
-    if grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"; then
+    grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"
+    if [[ "${?}" == "0" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
         echo "off"
     else
         echo "on"
@@ -45,10 +46,11 @@ fi
 ### END System checker
 
 INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    10 52 3 \
+    10 82 4 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
-    "custom" "Choose your favourite packages" off \
+    "custom" "Choose your favourite packages (not installed selected)" off \
+    "custom-zero" "Choose your favourite packages (no selected)" off \
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
@@ -69,10 +71,11 @@ if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
     CHOICES="update brave thunderbird git sublime-text-3 ufw"
 fi
 
-if [[ "${INSTALATION_PROFILE}" == "custom" ]]; then
+if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
         20 77 15 \
         "7zip" "7zip" $(is_installed "7zip") \
+        "blender" "Blender" $(is_installed "blender") \
         "brave" "Brave Browser" $(is_installed "brave") \
         "chrome" "chrome" $(is_installed "chrome") \
         "composer" "composer" $(is_installed "composer") \
