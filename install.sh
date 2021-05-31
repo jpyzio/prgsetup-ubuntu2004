@@ -27,6 +27,11 @@ password_input() {
 }
 
 function is_installed() {
+    if [[ ! -f "${ROOT_DIR}/.installed_modules" ]]; then
+        echo "on"
+        return
+    fi
+
     grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"
     if [[ "${?}" == "0" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
         echo "off"
@@ -46,11 +51,11 @@ fi
 ### END System checker
 
 INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    10 82 4 \
+    10 94 4 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
-    "custom" "Choose your favourite packages (not installed selected)" off \
-    "custom-zero" "Choose your favourite packages (no selected)" off \
+    "custom" "Choose your favourite packages (not installed modules are selected)" off \
+    "custom-zero" "Choose your favourite packages" off \
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
@@ -73,7 +78,7 @@ fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
-        20 77 15 \
+        20 83 15 \
         "7zip" "7zip" $(is_installed "7zip") \
         "blender" "Blender" $(is_installed "blender") \
         "brave" "Brave Browser" $(is_installed "brave") \
