@@ -136,7 +136,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "zsh" "zsh" $(is_installed "zsh") \
         "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
         "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
-        "jakub-customs" "Jacob's specific modifications of the system" $(is_installed "jakub-customs") \
+        "jakub-customs" "Jacob's specific modifications of the system" off \
         3>&2 2>&1 1>&3)
 fi
 
@@ -158,7 +158,9 @@ echo "${CHOICES}" >> "${ROOT_DIR}/.installed_modules"
 for CHOICE in ${CHOICES}; do
     CHOICE=$(echo "${CHOICE}" | tr --delete '"')
     # shellcheck disable=SC1090
+    echo -e "\e[33m======================================== BEGIN: ${CHOICE} ========================================\e[39m"
     source "${MODULES_DIR}/${CHOICE}.sh"
+    echo -e "\e[33m======================================== END: ${CHOICE} ========================================\e[39m"
 done
 
 if ${SHOULD_REBOOT}; then
