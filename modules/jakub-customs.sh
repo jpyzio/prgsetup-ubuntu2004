@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-cat "${ROOT_DIR}/assets/dconf-settings.ini" | sed 's|ROOT_DIR|'${ROOT_DIR}'|g' | run_as_user dconf load /
-
-run_as_user gsettings set org.gnome.Terminal.Legacy.Profile default-size-rows 35
-run_as_user gsettings set org.gnome.Terminal.Legacy.Profile default-size-columns 212
-run_as_user gsettings set org.gnome.Terminal.Legacy.Profile audible-bell false
-run_as_user gsettings set org.gnome.Terminal.Legacy.Profile scrollback-lines 10000000
-
-# ====================================================================================================================================
-
 run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
 
 # ====================================================================================================================================
