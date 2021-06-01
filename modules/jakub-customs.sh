@@ -44,7 +44,8 @@ run_as_user google-chrome https://extensions.gnome.org/extension/1271/sound-sett
     https://extensions.gnome.org/extension/104/netspeed/ \
     https://extensions.gnome.org/extension/1465/desktop-icons/ \
     https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/ \
-    https://extensions.gnome.org/extension/945/cpu-power-manager/
+    https://extensions.gnome.org/extension/945/cpu-power-manager/ \
+    https://extensions.gnome.org/extension/779/clipboard-indicator/
 
 # ====================================================================================================================================
 
