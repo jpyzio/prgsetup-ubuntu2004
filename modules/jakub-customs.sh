@@ -36,6 +36,8 @@ if ! which google-chrome > /dev/null; then
     source "${MODULES_DIR}/google-chrome.sh"
 fi
 
+apt install --yes gnome-shell-extensions chrome-gnome-shell
+
 run_as_user google-chrome https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep/
 
 run_as_user google-chrome https://extensions.gnome.org/extension/1271/sound-settings/ \
