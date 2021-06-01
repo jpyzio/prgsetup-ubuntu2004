@@ -2,20 +2,21 @@
 
 cat "${ROOT_DIR}/assets/dconf-settings.ini" | sed 's|ROOT_DIR|'${ROOT_DIR}'|g' | run_as_user dconf load /
 
-run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
+run_as_user gsettings set org.gnome.Terminal.Legacy.Profile default-size-rows 35
+run_as_user gsettings set org.gnome.Terminal.Legacy.Profile default-size-columns 212
+run_as_user gsettings set org.gnome.Terminal.Legacy.Profile audible-bell false
+run_as_user gsettings set org.gnome.Terminal.Legacy.Profile scrollback-lines 10000000
 
 # ====================================================================================================================================
 
-run_as_user gsettings set org.gnome.desktop.interface clock-show-seconds true
-run_as_user gsettings set org.gnome.desktop.interface clock-show-weekday true
-run_as_user gsettings set org.gnome.desktop.interface show-battery-percentage true
+run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
 
 # ====================================================================================================================================
 
 for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
     if ! groups | grep --quiet "${GROUP}"; then # The user does not belong to the group
         if cut -d: -f1 /etc/group | tr '\n' ' ' | grep --quiet "${GROUP}"; then # The group exists
-            usermod --append --groups "${USER_NAME}" "${USER_NAME}"
+            usermod --append --groups "${GROUP}" "${USER_NAME}"
         fi
     fi
 done
