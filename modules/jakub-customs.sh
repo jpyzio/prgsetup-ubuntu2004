@@ -57,4 +57,10 @@ run_as_user google-chrome https://extensions.gnome.org/extension/1271/sound-sett
 
 # ====================================================================================================================================
 
+if ! which brave-browser > /dev/null; then
+    source "${MODULES_DIR}/brave.sh"
+fi
+
+run_as_user brave-browser https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd
+
 SHOULD_REBOOT=true
