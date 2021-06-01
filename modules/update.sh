@@ -16,7 +16,7 @@ apt install --yes gdebi \
     gnupg-agent
 
 cd "${ROOT_DIR}"
-git pull
+run_as_user git pull
 cd -
 
 apt full-upgrade --yes
