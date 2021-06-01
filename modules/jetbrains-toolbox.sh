@@ -10,9 +10,9 @@ if [[ ! -f "${USER_HOME}/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox" ]
     TOOLBOX_FILE="${ROOT_DIR}/toolbox.tgz"
 
     wget --output-document="${TOOLBOX_FILE}" "${LATEST_URL}"
-    tar --extract --gzip --file="${TOOLBOX_FILE}"
+    run_as_user tar --extract --gzip --file="${TOOLBOX_FILE}"
 
-    jetbrains-toolbox-"${LATEST_BUILD}"/jetbrains-toolbox
+    run_as_user jetbrains-toolbox-"${LATEST_BUILD}"/jetbrains-toolbox
 
     rm "${TOOLBOX_FILE}"
     rm --recursive --force jetbrains-toolbox-"${LATEST_BUILD}"

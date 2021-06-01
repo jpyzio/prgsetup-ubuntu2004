@@ -15,7 +15,7 @@ USER_NAME="$(logname)"
 USER_HOME="$(eval echo ~"${USER_NAME}")"
 
 run_as_user() {
-    sudo -i -u "${USER_NAME}" "${@}"
+    sudo -i -H -u "${USER_NAME}" "${@}"
 }
 
 text_input() {
@@ -27,6 +27,11 @@ password_input() {
 }
 
 function is_installed() {
+    if [[ ! -f "${ROOT_DIR}/.installed_modules" ]]; then
+        echo "on"
+        return
+    fi
+
     grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"
     if [[ "${?}" == "0" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
         echo "off"
@@ -46,11 +51,11 @@ fi
 ### END System checker
 
 INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    10 82 4 \
+    10 94 4 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
-    "custom" "Choose your favourite packages (not installed selected)" off \
-    "custom-zero" "Choose your favourite packages (no selected)" off \
+    "custom" "Choose your favourite packages (not installed modules are selected)" off \
+    "custom-zero" "Choose your favourite packages" off \
     3>&2 2>&1 1>&3)
 
 if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
@@ -60,7 +65,7 @@ if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
         CHOICES="${CHOICES} docker-compose"
     fi
 
-    if [[ -f "${USER_HOME}/bin/PrusaSlicer.AppImage" ]]; then
+    if [[ -f "${ROOT_DIR}/bin/PrusaSlicer.AppImage" ]]; then
         CHOICES="${CHOICES} prusa-slicer"
     fi
 
@@ -73,7 +78,7 @@ fi
 
 if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
-        20 77 15 \
+        20 83 15 \
         "7zip" "7zip" $(is_installed "7zip") \
         "blender" "Blender" $(is_installed "blender") \
         "brave" "Brave Browser" $(is_installed "brave") \
@@ -97,9 +102,6 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "gpg" "gpg" $(is_installed "gpg") \
         "gpg-create-key" "gpg create key" $(is_installed "gpg-create-key") \
         "insomnia" "insomnia" $(is_installed "insomnia") \
-        "jakoob-aliases" "jakoob aliases" $(is_installed "jakoob-aliases") \
-        "jakoob-system-dock" "jakoob system dock" $(is_installed "jakoob-system-dock") \
-        "jakub-user-groups" "jakub user groups" $(is_installed "jakub-user-groups") \
         "jetbrains-toolbox" "jetbrains toolbox" $(is_installed "jetbrains-toolbox") \
         "kvm-for-android-studio" "kvm for android studio" $(is_installed "kvm-for-android-studio") \
         "libreoffice" "libreoffice" $(is_installed "libreoffice") \
@@ -139,7 +141,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "zsh" "zsh" $(is_installed "zsh") \
         "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
         "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
-        "jakoob-zsh-tuning" "jakoob zsh tuning" $(is_installed "jakoob-zsh-tuning") \
+        "jakub-customs" "Jacob's specific modifications of the system" off \
         3>&2 2>&1 1>&3)
 fi
 
@@ -161,7 +163,9 @@ echo "${CHOICES}" >> "${ROOT_DIR}/.installed_modules"
 for CHOICE in ${CHOICES}; do
     CHOICE=$(echo "${CHOICE}" | tr --delete '"')
     # shellcheck disable=SC1090
+    echo -e "\e[33m======================================== BEGIN: ${CHOICE} ========================================\e[39m"
     source "${MODULES_DIR}/${CHOICE}.sh"
+    echo -e "\e[33m======================================== END: ${CHOICE} ========================================\e[39m"
 done
 
 if ${SHOULD_REBOOT}; then

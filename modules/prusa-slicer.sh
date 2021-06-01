@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BIN_DIR="${USER_HOME}/bin"
+BIN_DIR="${ROOT_DIR}/bin"
 
 FILE_URL=$(curl -s https://api.github.com/repos/prusa3d/PrusaSlicer/releases/latest | grep AppImage | grep browser_download_url | grep -E 'https\:\/\/.*\-x64\-20' | xargs | cut -d ' ' -f2)
 
