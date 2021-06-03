@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ "$(id -u)" -eq 0 ]]; then
+    echo -e "\e[31mThis script must be run as normal user!\e[39m"
+    exit 1
+fi
+
 set -o pipefail
 set -o xtrace
 
