@@ -12,14 +12,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
 # ====================================================================================================================================
 
-sudo apt install --yes dconf-editor
-
-for CONF in ${ROOT_DIR}/assets/dconf/*.ini; do
-    sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${CONF}" | dconf load /
-done
-
-# ====================================================================================================================================
-
 for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
     if ! groups | grep --quiet "${GROUP}"; then # The user does not belong to the group
         if cut -d: -f1 /etc/group | tr '\n' ' ' | grep --quiet "${GROUP}"; then # The group exists
@@ -72,3 +64,19 @@ fi
 
 rm -f "${USER_HOME}/.face"
 ln -s "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
+
+# ====================================================================================================================================
+
+sudo apt install --yes dconf-editor
+
+for CONF in "${ROOT_DIR}"/assets/dconf/*.ini; do
+    sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${CONF}" | dconf load /
+done
+
+cd "${ROOT_DIR}/assets/dconf/gnome-shell-extensions" || exit
+for PLUGIN in *; do
+    if gsettings get org.gnome.shell enabled-extensions | grep -q "${PLUGIN}"; then
+        dconf load / < "${PLUGIN}"
+    fi
+done
+cd - || exit
