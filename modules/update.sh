@@ -15,10 +15,6 @@ apt install --yes gdebi \
     ca-certificates \
     gnupg-agent
 
-cd "${ROOT_DIR}"
-run_as_user git pull
-cd -
-
 apt full-upgrade --yes
 
 snap refresh
