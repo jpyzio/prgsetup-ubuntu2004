@@ -27,13 +27,18 @@ password_input() {
 }
 
 function is_installed() {
-    if [[ ! -f "${ROOT_DIR}/.installed_modules" && "${INSTALATION_PROFILE}" != "custom-zero" ]]; then
+    if [[ "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
+        echo "off"
+        return
+    fi
+
+    if [[ ! -f "${ROOT_DIR}/.installed_modules" ]]; then
         echo "on"
         return
     fi
 
-    grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"
-    if [[ "${?}" == "0" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
+
+    if grep --quiet "${1}" "${ROOT_DIR}/.installed_modules"; then
         echo "off"
     else
         echo "on"
