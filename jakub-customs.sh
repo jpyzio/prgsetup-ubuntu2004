@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 
-run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
+set -o pipefail
+set -o xtrace
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
 # ====================================================================================================================================
 
-apt install --yes dconf-editor
+sudo apt install --yes dconf-editor
 
-sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${ROOT_DIR}/assets/key-bindings.ini" | run_as_user dconf load /
+sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${ROOT_DIR}/assets/key-bindings.ini" | dconf load /
 
 # ====================================================================================================================================
 
 for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
     if ! groups | grep --quiet "${GROUP}"; then # The user does not belong to the group
         if cut -d: -f1 /etc/group | tr '\n' ' ' | grep --quiet "${GROUP}"; then # The group exists
-            usermod --append --groups "${GROUP}" "${USER_NAME}"
+            sudo usermod --append --groups "${GROUP}" "${USER_NAME}"
         fi
     fi
 done
@@ -38,29 +41,28 @@ done
 
 # ====================================================================================================================================
 
-if ! which google-chrome > /dev/null; then
-    source "${MODULES_DIR}/chrome.sh"
+if which google-chrome > /dev/null; then
+    sudo apt install --yes chrome-gnome-shell
+
+    google-chrome https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep/
+
+    google-chrome https://extensions.gnome.org/extension/1271/sound-settings/ \
+        https://extensions.gnome.org/extension/7/removable-drive-menu/ \
+        https://extensions.gnome.org/extension/750/openweather/ \
+        https://extensions.gnome.org/extension/104/netspeed/ \
+        https://extensions.gnome.org/extension/1465/desktop-icons/ \
+        https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/ \
+        https://extensions.gnome.org/extension/945/cpu-power-manager/ \
+        https://extensions.gnome.org/extension/779/clipboard-indicator/
 fi
-
-apt install --yes gnome-shell-extensions chrome-gnome-shell
-
-run_as_user google-chrome https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep/
-
-run_as_user google-chrome https://extensions.gnome.org/extension/1271/sound-settings/ \
-    https://extensions.gnome.org/extension/7/removable-drive-menu/ \
-    https://extensions.gnome.org/extension/750/openweather/ \
-    https://extensions.gnome.org/extension/104/netspeed/ \
-    https://extensions.gnome.org/extension/1465/desktop-icons/ \
-    https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/ \
-    https://extensions.gnome.org/extension/945/cpu-power-manager/ \
-    https://extensions.gnome.org/extension/779/clipboard-indicator/
 
 # ====================================================================================================================================
 
-if ! which brave-browser > /dev/null; then
-    source "${MODULES_DIR}/brave.sh"
+if which brave-browser > /dev/null; then
+    brave-browser https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd
 fi
 
-run_as_user brave-browser https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd
+# ====================================================================================================================================
 
-SHOULD_REBOOT=true
+rm -f "${USER_HOME}/.face"
+ln -s "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
