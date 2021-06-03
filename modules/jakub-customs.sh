@@ -33,7 +33,7 @@ done
 # ====================================================================================================================================
 
 if ! which google-chrome > /dev/null; then
-    source "${MODULES_DIR}/google-chrome.sh"
+    source "${MODULES_DIR}/chrome.sh"
 fi
 
 apt install --yes gnome-shell-extensions chrome-gnome-shell
