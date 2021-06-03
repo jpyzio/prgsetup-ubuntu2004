@@ -4,6 +4,12 @@ run_as_user cp "${ROOT_DIR}/assets/face" "${USER_HOME}/.face"
 
 # ====================================================================================================================================
 
+apt install --yes dconf-editor
+
+sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${ROOT_DIR}/assets/key-bindings.ini" | run_as_user dconf load /
+
+# ====================================================================================================================================
+
 for GROUP in video kvm www-data plugdev sambashare lpadmin adm sudo dialout; do
     if ! groups | grep --quiet "${GROUP}"; then # The user does not belong to the group
         if cut -d: -f1 /etc/group | tr '\n' ' ' | grep --quiet "${GROUP}"; then # The group exists
@@ -26,8 +32,8 @@ for FILE in ${USER_HOME}/.bashrc ${USER_HOME}/.zshrc; do
     fi
     if ! grep --quiet -E "source.*functions.sh" "${FILE}"; then
         echo "source \"${ROOT_DIR}/assets/functions.sh\"" >> "${FILE}"
-    fi  
-        chown "${USER_NAME}". "${FILE}"
+    fi
+    chown "${USER_NAME}". "${FILE}"
 done
 
 # ====================================================================================================================================
