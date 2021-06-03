@@ -27,7 +27,7 @@ password_input() {
 }
 
 function is_installed() {
-    if [[ ! -f "${ROOT_DIR}/.installed_modules" ]]; then
+    if [[ ! -f "${ROOT_DIR}/.installed_modules" && "${INSTALATION_PROFILE}" != "custom-zero" ]]; then
         echo "on"
         return
     fi
