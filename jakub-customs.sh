@@ -14,8 +14,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
 sudo apt install --yes dconf-editor
 
-for CONF in "key-bindings"; do
-    sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${ROOT_DIR}/assets/dconf/${CONF}.ini" | dconf load /
+for CONF in ${ROOT_DIR}/assets/dconf/*.ini; do
+    sed 's|ROOT_DIR|'"${ROOT_DIR}"'|g' "${CONF}" | dconf load /
 done
 
 # ====================================================================================================================================
