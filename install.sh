@@ -98,6 +98,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "vlc" "vlc" $(is_installed "vlc") \
         "webp" "webp" $(is_installed "webp") \
         "yarn" "yarn" $(is_installed "yarn") \
+        "zoom" "zoom" $(is_installed "zoom") \
         "zsh" "zsh" $(is_installed "zsh") \
         "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
         "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
