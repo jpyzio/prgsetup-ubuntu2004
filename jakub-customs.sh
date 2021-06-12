@@ -57,7 +57,8 @@ fi
 # ====================================================================================================================================
 
 if which brave-browser > /dev/null; then
-    brave-browser https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd
+    brave-browser https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd \
+        https://chrome.google.com/webstore/detail/dark-space/idmnciiknelklflhdlnkokcoihkidkln
 fi
 
 # ====================================================================================================================================
