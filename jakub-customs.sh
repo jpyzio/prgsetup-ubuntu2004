@@ -51,7 +51,8 @@ if which google-chrome > /dev/null; then
         https://extensions.gnome.org/extension/104/netspeed/ \
         https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/ \
         https://extensions.gnome.org/extension/945/cpu-power-manager/ \
-        https://extensions.gnome.org/extension/779/clipboard-indicator/
+        https://extensions.gnome.org/extension/779/clipboard-indicator/ \
+        https://extensions.gnome.org/extension/605/multiclock/
 fi
 
 # ====================================================================================================================================
