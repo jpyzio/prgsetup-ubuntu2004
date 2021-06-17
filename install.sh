@@ -89,6 +89,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "ssh-keygen" "ssh keygen" $(is_installed "ssh-keygen") \
         "ssh-server" "ssh server" $(is_installed "ssh-server") \
         "sshfs" "sshfs" $(is_installed "sshfs") \
+        "swap" "Add SWAP file" $(is_installed "swap") \
         "sublime-text-4" "sublime Text 4" $(is_installed "sublime-text-4") \
         "symfony-cli" "symfony cli" $(is_installed "symfony-cli") \
         "thunderbird" "thunderbird" $(is_installed "thunderbird") \
