@@ -14,7 +14,8 @@ Download and execute the configurator
 
 ```bash
 git clone https://github.com/jpyzio/prgsetup-ubuntu2004.git ~/.prgsetup
-sudo bash ~/.prgsetup/install.sh
+~/.prgsetup/install.sh
+sudo ~/.prgsetup/run.sh
 ```
 
 ## Contributing
