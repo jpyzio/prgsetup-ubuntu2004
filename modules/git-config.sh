@@ -23,3 +23,5 @@ run_as_user git config --global push.default "${PUSH_DEFAULT}"
 if ! grep --quiet 'excludesfile' "${USER_HOME}/.gitconfig"; then
     run_as_user git config --global core.excludesfile "${ROOT_DIR}/.gitignore_global"
 fi
+
+git config --global core.autocrlf
