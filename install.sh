@@ -65,6 +65,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "jetbrains-toolbox" "jetbrains toolbox" $(is_installed "jetbrains-toolbox") \
         "kvm-for-android-studio" "kvm for android studio" $(is_installed "kvm-for-android-studio") \
         "libreoffice" "libreoffice" $(is_installed "libreoffice") \
+        "miro" "Online Whiteboard" $(is_installed "miro") \
         "mysql" "mysql" $(is_installed "mysql") \
         "nautilus-extensions" "nautilus extensions" $(is_installed "nautilus-extensions") \
         "network-tools" "network tools" $(is_installed "network-tools") \
