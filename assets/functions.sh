@@ -38,3 +38,9 @@ function rmalld(){
     clear
     lsda
 }
+
+rescreen(){
+    for I in $(screen -list | grep Detached | cut -d '  ' -f2); do
+        screen -r "${I}"
+    done
+}
