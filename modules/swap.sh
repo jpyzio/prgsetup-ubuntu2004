@@ -1,4 +1,4 @@
-set -e
+#!/usr/bin/env bash
 
 SWAP_FILE='/swapfile'
 FSTAB_FILE='/etc/fstab'
