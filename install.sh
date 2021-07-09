@@ -95,6 +95,7 @@ if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custo
         "thunderbird" "thunderbird" $(is_installed "thunderbird") \
         "tmux" "tmux" $(is_installed "tmux") \
         "ufw" "ufw" $(is_installed "ufw") \
+        "video-processing" "Video apps" $(is_installed "video-processing") \
         "virtualbox" "virtualbox" $(is_installed "virtualbox") \
         "vlc" "vlc" $(is_installed "vlc") \
         "webp" "webp" $(is_installed "webp") \
