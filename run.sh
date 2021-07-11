@@ -10,7 +10,7 @@ set -o xtrace
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
-INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
+INSTALLATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
     10 94 4 \
     "update" "Update system packages" on \
     "mini" "Minimal installation" off \
@@ -18,7 +18,7 @@ INSTALATION_PROFILE=$(whiptail --radiolist "Select which services do you want to
     "custom-zero" "Choose your favourite packages" off \
     3>&2 2>&1 1>&3)
 
-if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
+if [[ "${INSTALLATION_PROFILE}" == "update" ]]; then
     CHOICES="self-update update"
 
     if which docker-compose > /dev/null; then
@@ -32,79 +32,79 @@ if [[ "${INSTALATION_PROFILE}" == "update" ]]; then
     date '+%s' > "${ROOT_DIR}/.last_update"
 fi
 
-if [[ "${INSTALATION_PROFILE}" == "mini" ]]; then
+if [[ "${INSTALLATION_PROFILE}" == "mini" ]]; then
     CHOICES="update brave thunderbird git sublime-text-3 ufw"
 fi
 
-if [[ "${INSTALATION_PROFILE}" == "custom" || "${INSTALATION_PROFILE}" == "custom-zero" ]]; then
+if [[ "${INSTALLATION_PROFILE}" == "custom" || "${INSTALLATION_PROFILE}" == "custom-zero" ]]; then
     CHOICES=$(whiptail --checklist "Select which services do you want to install. " \
         20 83 15 \
-        "7zip" "7zip" $(is_installed "7zip") \
-        "blender" "Blender" $(is_installed "blender") \
-        "brave" "Brave Browser" $(is_installed "brave") \
-        "chrome" "chrome" $(is_installed "chrome") \
-        "composer" "composer" $(is_installed "composer") \
-        "composer-test-utils" "composer test utils" $(is_installed "composer-test-utils") \
-        "cpufreq" "cpufreq" $(is_installed "cpufreq") \
-        "diagnostic-tools" "diagnostic tools" $(is_installed "diagnostic-tools") \
-        "diff-utils" "diff utils" $(is_installed "diff-utils") \
-        "docker" "docker" $(is_installed "docker") \
-        "docker-compose" "docker compose" $(is_installed "docker-compose") \
-        "fiezilla" "fiezilla" $(is_installed "fiezilla") \
-        "firefox" "firefox" $(is_installed "firefox") \
-        "ftpfs" "ftpfs" $(is_installed "ftpfs") \
-        "gimp" "gimp" $(is_installed "gimp") \
-        "git" "git" $(is_installed "git") \
-        "git-config" "git config" $(is_installed "git-config") \
-        "git-hooks" "git hooks" $(is_installed "git-hooks") \
-        "gnome" "Gnome tools" $(is_installed "gnome") \
-        "gparted" "gparted" $(is_installed "gparted") \
-        "gpg" "gpg" $(is_installed "gpg") \
-        "gpg-create-key" "gpg create key" $(is_installed "gpg-create-key") \
-        "insomnia" "insomnia" $(is_installed "insomnia") \
-        "jetbrains-toolbox" "jetbrains toolbox" $(is_installed "jetbrains-toolbox") \
-        "kvm-for-android-studio" "kvm for android studio" $(is_installed "kvm-for-android-studio") \
-        "libreoffice" "libreoffice" $(is_installed "libreoffice") \
-        "miro" "Online Whiteboard" $(is_installed "miro") \
-        "mysql" "mysql" $(is_installed "mysql") \
-        "nautilus-extensions" "nautilus extensions" $(is_installed "nautilus-extensions") \
-        "network-tools" "network tools" $(is_installed "network-tools") \
-        "nfs" "nfs" $(is_installed "nfs") \
-        "nodejs-12" "nodejs 12" $(is_installed "nodejs-12") \
-        "obs-studio" "OBS Studio" $(is_installed "obs-studio") \
-        "openvpn-client" "openvpn client" $(is_installed "openvpn-client") \
-        "php7.4-with-extensions" "PHP 7.4 with extensions" $(is_installed "php7.4-with-extensions") \
-        "php8.0-with-extensions" "PHP 8.0 with extensions" $(is_installed "php8.0-with-extensions") \
-        "postgresql" "postgresql" $(is_installed "postgresql") \
-        "postman" "postman" $(is_installed "postman") \
-        "prusa-slicer" "Prusa Slicer" $(is_installed "prusa-slicer") \
-        "rkhunter" "rkhunter" $(is_installed "rkhunter") \
-        "rsync" "rsync" $(is_installed "rsync") \
-        "secure-delete" "secure delete" $(is_installed "secure-delete") \
-        "shellcheck" "shellcheck" $(is_installed "shellcheck") \
-        "signal" "Signal" $(is_installed "signal") \
-        "slack" "slack" $(is_installed "slack") \
-        "smart-tools" "smart tools" $(is_installed "smart-tools") \
-        "speedtest" "speedtest" $(is_installed "speedtest") \
-        "spotify" "spotify" $(is_installed "spotify") \
-        "ssh-keygen" "ssh keygen" $(is_installed "ssh-keygen") \
-        "ssh-server" "ssh server" $(is_installed "ssh-server") \
-        "sshfs" "sshfs" $(is_installed "sshfs") \
-        "swap" "Add SWAP file" $(is_installed "swap") \
-        "sublime-text-4" "sublime Text 4" $(is_installed "sublime-text-4") \
-        "symfony-cli" "symfony cli" $(is_installed "symfony-cli") \
-        "thunderbird" "thunderbird" $(is_installed "thunderbird") \
-        "tmux" "tmux" $(is_installed "tmux") \
-        "ufw" "ufw" $(is_installed "ufw") \
-        "video-processing" "Video apps" $(is_installed "video-processing") \
-        "virtualbox" "virtualbox" $(is_installed "virtualbox") \
-        "vlc" "vlc" $(is_installed "vlc") \
-        "webp" "webp" $(is_installed "webp") \
-        "yarn" "yarn" $(is_installed "yarn") \
-        "zoom" "zoom" $(is_installed "zoom") \
-        "zsh" "zsh" $(is_installed "zsh") \
-        "zsh-fzf" "zsh fzf" $(is_installed "zsh-fzf") \
-        "zsh-oh-my-zsh" "Oh my ZSH" $(is_installed "zsh-oh-my-zsh") \
+        "7zip" "7zip" "$(is_installed "7zip")" \
+        "blender" "Blender" "$(is_installed "blender")" \
+        "brave" "Brave Browser" "$(is_installed "brave")" \
+        "chrome" "chrome" "$(is_installed "chrome")" \
+        "composer" "composer" "$(is_installed "composer")" \
+        "composer-test-utils" "composer test utils" "$(is_installed "composer-test-utils")" \
+        "cpufreq" "cpufreq" "$(is_installed "cpufreq")" \
+        "diagnostic-tools" "diagnostic tools" "$(is_installed "diagnostic-tools")" \
+        "diff-utils" "diff utils" "$(is_installed "diff-utils")" \
+        "docker" "docker" "$(is_installed "docker")" \
+        "docker-compose" "docker compose" "$(is_installed "docker-compose")" \
+        "fiezilla" "fiezilla" "$(is_installed "fiezilla")" \
+        "firefox" "firefox" "$(is_installed "firefox")" \
+        "ftpfs" "ftpfs" "$(is_installed "ftpfs")" \
+        "gimp" "gimp" "$(is_installed "gimp")" \
+        "git" "git" "$(is_installed "git")" \
+        "git-config" "git config" "$(is_installed "git-config")" \
+        "git-hooks" "git hooks" "$(is_installed "git-hooks")" \
+        "gnome" "Gnome tools" "$(is_installed "gnome")" \
+        "gparted" "gparted" "$(is_installed "gparted")" \
+        "gpg" "gpg" "$(is_installed "gpg")" \
+        "gpg-create-key" "gpg create key" "$(is_installed "gpg-create-key")" \
+        "insomnia" "insomnia" "$(is_installed "insomnia")" \
+        "jetbrains-toolbox" "jetbrains toolbox" "$(is_installed "jetbrains-toolbox")" \
+        "kvm-for-android-studio" "kvm for android studio" "$(is_installed "kvm-for-android-studio")" \
+        "libreoffice" "libreoffice" "$(is_installed "libreoffice")" \
+        "miro" "Online Whiteboard" "$(is_installed "miro")" \
+        "mysql" "mysql" "$(is_installed "mysql")" \
+        "nautilus-extensions" "nautilus extensions" "$(is_installed "nautilus-extensions")" \
+        "network-tools" "network tools" "$(is_installed "network-tools")" \
+        "nfs" "nfs" "$(is_installed "nfs")" \
+        "nodejs-12" "nodejs 12" "$(is_installed "nodejs-12")" \
+        "obs-studio" "OBS Studio" "$(is_installed "obs-studio")" \
+        "openvpn-client" "openvpn client" "$(is_installed "openvpn-client")" \
+        "php7.4-with-extensions" "PHP 7.4 with extensions" "$(is_installed "php7.4-with-extensions")" \
+        "php8.0-with-extensions" "PHP 8.0 with extensions" "$(is_installed "php8.0-with-extensions")" \
+        "postgresql" "postgresql" "$(is_installed "postgresql")" \
+        "postman" "postman" "$(is_installed "postman")" \
+        "prusa-slicer" "Prusa Slicer" "$(is_installed "prusa-slicer")" \
+        "rkhunter" "rkhunter" "$(is_installed "rkhunter")" \
+        "rsync" "rsync" "$(is_installed "rsync")" \
+        "secure-delete" "secure delete" "$(is_installed "secure-delete")" \
+        "shellcheck" "shellcheck" "$(is_installed "shellcheck")" \
+        "signal" "Signal" "$(is_installed "signal")" \
+        "slack" "slack" "$(is_installed "slack")" \
+        "smart-tools" "smart tools" "$(is_installed "smart-tools")" \
+        "speedtest" "speedtest" "$(is_installed "speedtest")" \
+        "spotify" "spotify" "$(is_installed "spotify")" \
+        "ssh-keygen" "ssh keygen" "$(is_installed "ssh-keygen")" \
+        "ssh-server" "ssh server" "$(is_installed "ssh-server")" \
+        "sshfs" "sshfs" "$(is_installed "sshfs")" \
+        "swap" "Add SWAP file" "$(is_installed "swap")" \
+        "sublime-text-4" "sublime Text 4" "$(is_installed "sublime-text-4")" \
+        "symfony-cli" "symfony cli" "$(is_installed "symfony-cli")" \
+        "thunderbird" "thunderbird" "$(is_installed "thunderbird")" \
+        "tmux" "tmux" "$(is_installed "tmux")" \
+        "ufw" "ufw" "$(is_installed "ufw")" \
+        "video-processing" "Video apps" "$(is_installed "video-processing")" \
+        "virtualbox" "virtualbox" "$(is_installed "virtualbox")" \
+        "vlc" "vlc" "$(is_installed "vlc")" \
+        "webp" "webp" "$(is_installed "webp")" \
+        "yarn" "yarn" "$(is_installed "yarn")" \
+        "zoom" "zoom" "$(is_installed "zoom")" \
+        "zsh" "zsh" "$(is_installed "zsh")" \
+        "zsh-fzf" "zsh fzf" "$(is_installed "zsh-fzf")" \
+        "zsh-oh-my-zsh" "Oh my ZSH" "$(is_installed "zsh-oh-my-zsh")" \
         3>&2 2>&1 1>&3)
 fi
 
@@ -127,6 +127,7 @@ for CHOICE in ${CHOICES}; do
     CHOICE=$(echo "${CHOICE}" | tr --delete '"')
     # shellcheck disable=SC1090
     echo -e "\e[33m======================================== BEGIN: ${CHOICE} ========================================\e[39m"
+    # shellcheck disable=SC1090
     source "${MODULES_DIR}/${CHOICE}.sh"
     echo -e "\e[33m======================================== END: ${CHOICE} ========================================\e[39m"
 done
