@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -o pipefail
-set -o xtrace
 
 SHOULD_REBOOT=false
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

@@ -1,4 +1,11 @@
-echo -e "if [[ ! -f /home/jakub/.prgsetup/.last_update || "$(($(expr $(date +%s) - $(cat /home/jakub/.prgsetup/.last_update))/86400))" -gt "7" ]] ; then
-    echo "Update your system..."
-    sudo "/home/jakub/.prgsetup/run.sh"
-fi" >> ~/.zshrc ~/.bashrc
+#!/usr/bin/env bash
+
+set -o pipefail
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
+
+while ! echo "${UPDATE_PERIOD}" | grep -qE '^[0-9]+$'; do
+    UPDATE_PERIOD=$(text_input "Set update check period [in days]")
+done
+
+echo -e "\nUPDATE_PERIOD=${UPDATE_PERIOD}\n${ROOT_DIR}/check.sh" | tee --append ~/.zshrc | tee --append ~/.bashrc

@@ -6,17 +6,20 @@ if [[ "$(id -u)" -ne 0 ]]; then
 fi
 
 set -o pipefail
-set -o xtrace
+
+if [[ -z "${INSTALLATION_PROFILE}" ]]; then
+  INSTALLATION_PROFILE="${1}"
+else
+  INSTALLATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
+      10 94 4 \
+      "update" "Update system packages" on \
+      "mini" "Minimal installation" off \
+      "custom" "Choose your favourite packages (not installed modules are selected)" off \
+      "custom-zero" "Choose your favourite packages" off \
+      3>&2 2>&1 1>&3)
+fi
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
-
-INSTALLATION_PROFILE=$(whiptail --radiolist "Select which services do you want to install. " \
-    10 94 4 \
-    "update" "Update system packages" on \
-    "mini" "Minimal installation" off \
-    "custom" "Choose your favourite packages (not installed modules are selected)" off \
-    "custom-zero" "Choose your favourite packages" off \
-    3>&2 2>&1 1>&3)
 
 if [[ "${INSTALLATION_PROFILE}" == "update" ]]; then
     CHOICES="self-update update"
